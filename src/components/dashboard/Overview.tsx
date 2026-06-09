@@ -34,17 +34,37 @@ const mockData = [
   { name: 'Sun', value: 18 },
 ];
 
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const item = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0 }
+};
+
 export const Overview: React.FC = () => {
   const { timeSavedCount } = useStore();
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-700">
+    <motion.div 
+      variants={container}
+      initial="hidden"
+      animate="show"
+      className="space-y-8"
+    >
       {/* Bento Grid Header Cards */}
       <div className="grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-fr">
         {/* Large Time Saved Card */}
         <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          variants={item}
+          whileHover={{ y: -4, scale: 1.01 }}
           className="md:col-span-12 lg:col-span-4 glass-card p-6 relative overflow-hidden group"
         >
           <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
@@ -69,9 +89,8 @@ export const Overview: React.FC = () => {
 
         {/* Tickets Resolved Card */}
         <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
+          variants={item}
+          whileHover={{ y: -4, scale: 1.01 }}
           className="md:col-span-6 lg:col-span-4 glass-card p-6"
         >
           <span className="text-white/40 text-[10px] font-mono uppercase tracking-[0.2em] mb-2">Tickets Resolved</span>
@@ -79,7 +98,7 @@ export const Overview: React.FC = () => {
             <span className="text-4xl font-bold text-white tracking-tighter">142</span>
             <div className="flex items-center gap-1 text-emerald-400 text-xs font-mono ml-auto">
               <TrendingUp className="w-3 h-3" />
-              <span>+12% vs yesterday</span>
+              <span>+12%</span>
             </div>
           </div>
           <div className="mt-6 flex flex-wrap gap-2">
@@ -93,9 +112,8 @@ export const Overview: React.FC = () => {
 
         {/* Revenue Guarded Card */}
         <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
+          variants={item}
+          whileHover={{ y: -4, scale: 1.01 }}
           className="md:col-span-6 lg:col-span-4 glass-card p-6 border-l-4 border-l-[#a855f7]"
         >
           <span className="text-white/40 text-[10px] font-mono uppercase tracking-[0.2em] mb-2">Revenue Guarded</span>
@@ -111,20 +129,20 @@ export const Overview: React.FC = () => {
         </motion.div>
 
         {/* Main Analytics Hub */}
-        <div className="md:col-span-12 lg:col-span-8 glass-card p-8">
+        <motion.div variants={item} className="md:col-span-12 lg:col-span-8 glass-card p-4 md:p-8">
           <div className="flex justify-between items-center mb-10">
             <div>
                <h3 className="text-xl font-bold tracking-tight">System Performance</h3>
                <p className="text-white/30 text-xs mt-1 uppercase tracking-widest font-mono">Real-time Efficiency Metrics</p>
             </div>
-            <div className="flex gap-4">
+            <div className="flex gap-4 hidden sm:flex">
               <div className="flex items-center gap-2 group cursor-pointer">
                  <div className="w-2 h-2 rounded-full bg-[#00f5ff] shadow-[0_0_8px_#00f5ff]" />
                  <span className="text-[10px] font-mono uppercase tracking-widest text-[#00f5ff]">Optimization Hours</span>
               </div>
             </div>
           </div>
-          <div className="h-[340px] w-full">
+          <div className="h-[280px] md:h-[340px] w-full">
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={mockData}>
                 <defs>
@@ -162,10 +180,10 @@ export const Overview: React.FC = () => {
               </AreaChart>
             </ResponsiveContainer>
           </div>
-        </div>
+        </motion.div>
 
         {/* Activity Sidebar Bento */}
-        <div className="md:col-span-12 lg:col-span-4 glass-card p-8 flex flex-col">
+        <motion.div variants={item} className="md:col-span-12 lg:col-span-4 glass-card p-6 md:p-8 flex flex-col">
           <h3 className="text-lg font-bold mb-8 flex items-center gap-3">
             <Zap className="w-5 h-5 text-[#a855f7]" />
             Live Event Log
@@ -189,21 +207,23 @@ export const Overview: React.FC = () => {
               </div>
             ))}
           </div>
-          <button className="mt-8 w-full py-4 rounded-2xl bg-white/[0.03] border border-white/5 text-[10px] font-mono uppercase tracking-[0.2em] font-bold text-white/40 hover:text-white hover:bg-brand-cyan/5 hover:border-brand-cyan/20 transition-all flex items-center justify-center gap-2"
-            onClick={() => {
-              const types = ['task', 'error', 'message'] as const;
-              const type = types[Math.floor(Math.random() * types.length)];
-              import('../../services/notificationService').then(m => m.simulateIncomingEvent(type));
-            }}
-          >
-            <Zap className="w-3 h-3 text-brand-cyan" />
-            Simulate AI Event (Notification)
-          </button>
-          <button className="mt-2 w-full py-4 rounded-2xl bg-white/[0.03] border border-white/5 text-[10px] font-mono uppercase tracking-[0.2em] font-bold text-white/40 hover:text-white transition-colors">
-            View System History
-          </button>
-        </div>
+          <div className="mt-8 space-y-2">
+            <button className="w-full py-4 rounded-2xl bg-white/[0.03] border border-white/5 text-[10px] font-mono uppercase tracking-[0.2em] font-bold text-white/40 hover:text-white hover:bg-brand-cyan/5 hover:border-brand-cyan/20 transition-all flex items-center justify-center gap-2"
+              onClick={() => {
+                const types = ['task', 'error', 'message'] as const;
+                const type = types[Math.floor(Math.random() * types.length)];
+                import('../../services/notificationService').then(m => m.simulateIncomingEvent(type));
+              }}
+            >
+              <Zap className="w-3 h-3 text-brand-cyan" />
+              Simulate AI Event
+            </button>
+            <button className="w-full py-4 rounded-2xl bg-white/[0.03] border border-white/5 text-[10px] font-mono uppercase tracking-[0.2em] font-bold text-white/40 hover:text-white transition-colors">
+              View History
+            </button>
+          </div>
+        </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 };

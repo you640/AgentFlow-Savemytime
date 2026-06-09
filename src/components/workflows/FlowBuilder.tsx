@@ -72,32 +72,33 @@ export const FlowBuilder: React.FC = () => {
 
   return (
     <div className="space-y-8 animate-in slide-in-from-bottom duration-700">
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
         <div className="flex items-center gap-4">
           <button 
             onClick={() => setActiveTemplate(null)}
-            className="p-2 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors"
+            className="p-3 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors"
           >
-            <ChevronLeft className="w-5 h-5" />
+            <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
           </button>
           <div>
-            <h2 className="text-2xl font-bold">{activeTemplate.name}</h2>
-            <p className="text-slate-500 text-sm">{activeTemplate.description}</p>
+            <h2 className="text-xl md:text-2xl font-bold">{activeTemplate.name}</h2>
+            <p className="text-white/40 text-[10px] md:text-xs font-mono uppercase tracking-widest">{activeTemplate.description}</p>
           </div>
         </div>
-        <div className="flex gap-4">
-          <button className="px-6 py-2 border border-white/10 rounded-xl text-white/40 font-bold text-sm hover:bg-white/5 transition-colors">
-            Test Workflow
+        <div className="flex gap-3 w-full md:w-auto">
+          <button className="flex-1 md:flex-none px-6 py-3 border border-white/10 rounded-xl text-white/40 font-bold text-xs hover:bg-white/5 transition-colors">
+            Test Logic
           </button>
-          <button className="px-6 py-2 bg-gradient-to-r from-brand-cyan to-brand-purple rounded-xl text-white font-bold text-sm shadow-xl shadow-brand-cyan/20 flex items-center gap-2 neon-glow-cyan">
-            Deploy Now
+          <button className="flex-1 md:flex-none px-6 py-3 bg-gradient-to-r from-brand-cyan to-brand-purple rounded-xl text-white font-bold text-xs shadow-xl shadow-brand-cyan/20 flex items-center justify-center gap-2 neon-glow-cyan">
+             Activate
+             <ArrowRight className="w-4 h-4" />
           </button>
         </div>
       </div>
 
-      <div className="glass h-[540px] w-full overflow-hidden relative cursor-grab active:cursor-grabbing p-12 flex items-center justify-center bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] bg-opacity-10 border border-white/5 rounded-[2rem] shadow-inner shadow-black">
+      <div className="glass h-[400px] md:h-[540px] w-full overflow-x-auto relative cursor-grab active:cursor-grabbing p-6 md:p-12 flex md:items-center md:justify-center bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] bg-opacity-10 border border-white/5 rounded-[1.5rem] md:rounded-[2rem] shadow-inner shadow-black scrollbar-hide">
          {/* Simple Visual Flow Representation */}
-         <div className="flex items-center gap-12 relative flex-wrap justify-center max-w-4xl">
+         <div className="inline-flex items-center gap-8 md:gap-12 relative h-full md:h-auto py-8 md:py-0">
             {activeTemplate.nodes.map((node, i) => (
               <React.Fragment key={i}>
                 <Node 
@@ -105,13 +106,13 @@ export const FlowBuilder: React.FC = () => {
                   icon={node.icon} 
                   label={node.label} 
                   sub={node.sub} 
-                  delay={i * 0.15}
+                  delay={i * 0.1}
                 />
                 
                 {i < activeTemplate.nodes.length - 1 && (
-                  <div className="w-12 h-[2px] bg-gradient-to-r from-white/10 to-brand-cyan/30 relative">
+                  <div className="w-8 md:w-12 h-[2px] bg-gradient-to-r from-white/10 to-brand-cyan/30 relative flex-shrink-0">
                      <motion.div 
-                        animate={{ x: [0, 48, 0], opacity: [0, 1, 0] }}
+                        animate={{ x: [0, 32, 0], opacity: [0, 1, 0] }}
                         transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
                         className="absolute top-1/2 -translate-y-1/2 w-4 h-4 bg-brand-cyan blur-md rounded-full" 
                      />

@@ -22,6 +22,7 @@ export const sendNotification = (title: string, body: string, icon = '/favicon.i
       body,
       icon,
       badge: icon,
+      // @ts-ignore
       vibrate: [200, 100, 200],
     });
 

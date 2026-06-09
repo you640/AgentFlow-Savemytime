@@ -10,14 +10,7 @@ import {
   Sparkles
 } from 'lucide-react';
 import { cn } from '../../lib/utils';
-import { InboxItem } from '../../types';
-
-const mockInbox: InboxItem[] = [
-  { id: '1', source: 'gmail', sender: 'Milan K.', title: 'Zmena v objednávke #1233', preview: 'Prosím o zmenu adresy doručenia na ul. Mlynská 4...', time: '14:22', category: 'high' },
-  { id: '2', source: 'shopify', sender: 'System', title: 'Nová objednávka #8821', preview: 'Zákazník vybral platbu vopred, čakáme na úhradu.', time: '13:10', category: 'auto-resolved' },
-  { id: '3', source: 'instagram', sender: '_nina.style_', title: 'DM: Otázka na veľkosť', preview: 'Ahojte, budú tieto šaty aj v modrej farbe?', time: '11:05', category: 'medium' },
-  { id: '4', source: 'support', sender: 'Jozef T.', title: 'Reklamácia #990', preview: 'Tovar mi prišiel poškodený, posielam fotky...', time: 'Včera', category: 'high' },
-];
+import { MOCK_INBOX_ITEMS } from '../../constants/inbox';
 
 const sourceIcons = {
   gmail: Mail,
@@ -53,7 +46,7 @@ export const UnifiedInbox: React.FC = () => {
       </div>
       
       <div className="divide-y divide-white/5">
-        {mockInbox.map((item) => {
+        {MOCK_INBOX_ITEMS.map((item) => {
           const Icon = sourceIcons[item.source];
           return (
             <motion.div 

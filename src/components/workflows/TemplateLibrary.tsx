@@ -8,6 +8,21 @@ interface TemplateLibraryProps {
   onSelect: (template: WorkflowTemplate) => void;
 }
 
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const item = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0 }
+};
+
 export const TemplateLibrary: React.FC<TemplateLibraryProps> = ({ onSelect }) => {
   return (
     <div className="space-y-6">
@@ -16,13 +31,20 @@ export const TemplateLibrary: React.FC<TemplateLibraryProps> = ({ onSelect }) =>
         <h3 className="text-lg font-bold">Standard Blueprints</h3>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <motion.div 
+        variants={container}
+        initial="hidden"
+        animate="show"
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+      >
         {WORKFLOW_TEMPLATES.map((template) => (
           <motion.div
             key={template.id}
+            variants={item}
             whileHover={{ y: -4, scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             onClick={() => onSelect(template)}
-            className="glass-card p-6 cursor-pointer group flex flex-col h-full"
+            className="glass-card p-6 cursor-pointer group flex flex-col h-full active:bg-white/10 transition-colors"
           >
             <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center mb-4 group-hover:bg-brand-cyan/10 transition-colors">
               <template.icon className="w-6 h-6 text-white/40 group-hover:text-brand-cyan transition-colors" />
@@ -41,13 +63,13 @@ export const TemplateLibrary: React.FC<TemplateLibraryProps> = ({ onSelect }) =>
                   </div>
                 ))}
               </div>
-              <button className="text-[10px] uppercase font-bold text-brand-cyan flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+              <button className="text-[10px] uppercase font-bold text-brand-cyan flex items-center gap-1 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
                 Deploy <ArrowRight className="w-3 h-3" />
               </button>
             </div>
           </motion.div>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 };
