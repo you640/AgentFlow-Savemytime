@@ -53,15 +53,15 @@ export const FlowBuilder: React.FC = () => {
     return (
       <div className="space-y-12 animate-in fade-in duration-700">
         <header>
-          <h2 className="text-3xl font-bold tracking-tight text-white">Action Graph</h2>
-          <p className="text-white/40 text-xs mt-1 uppercase tracking-widest font-mono font-medium">Build and deploy autonomous logic</p>
+          <h2 className="text-3xl font-bold tracking-tight text-white">Graf procesov</h2>
+          <p className="text-white/40 text-xs mt-1 uppercase tracking-widest font-mono font-medium">Zostavenie a spustenie autonómnej logiky</p>
         </header>
 
         <section>
           <div className="flex items-center justify-between mb-8">
-            <h3 className="text-lg font-bold text-white/80">Select a Template to Start</h3>
+            <h3 className="text-lg font-bold text-white/80">Vyberte šablónu pre začiatok</h3>
             <button className="px-6 py-2 bg-white/5 border border-white/10 rounded-xl text-white/40 font-bold text-xs hover:text-white transition-colors">
-              Custom Flow (Empty)
+              Vlastný proces (prázdny)
             </button>
           </div>
           <TemplateLibrary onSelect={setActiveTemplate} />
@@ -87,10 +87,10 @@ export const FlowBuilder: React.FC = () => {
         </div>
         <div className="flex gap-3 w-full md:w-auto">
           <button className="flex-1 md:flex-none px-6 py-3 border border-white/10 rounded-xl text-white/40 font-bold text-xs hover:bg-white/5 transition-colors">
-            Test Logic
+            Otestovať logiku
           </button>
           <button className="flex-1 md:flex-none px-6 py-3 bg-gradient-to-r from-brand-cyan to-brand-purple rounded-xl text-white font-bold text-xs shadow-xl shadow-brand-cyan/20 flex items-center justify-center gap-2 neon-glow-cyan">
-             Activate
+             Aktivovať
              <ArrowRight className="w-4 h-4" />
           </button>
         </div>
@@ -144,15 +144,15 @@ export const FlowBuilder: React.FC = () => {
          <div className="glass-card p-6 flex items-center gap-4 border-l-2 border-l-brand-purple/50">
             <Mail className="w-8 h-8 text-brand-purple" />
             <div>
-               <div className="text-white font-bold tracking-tight">Notifications Active</div>
-               <div className="text-[10px] text-white/30 uppercase font-mono tracking-widest mt-1">Sent to Admin App</div>
+               <div className="text-white font-bold tracking-tight">Aktívne upozornenia</div>
+               <div className="text-[10px] text-white/30 uppercase font-mono tracking-widest mt-1">Odosielané do administrácie</div>
             </div>
          </div>
          <div className="glass-card p-6 flex items-center gap-4 border-l-2 border-l-brand-cyan/50">
             <Settings2 className="w-8 h-8 text-brand-cyan" />
             <div>
-               <div className="text-white font-bold tracking-tight">Auto-Recovery</div>
-               <div className="text-[10px] text-white/30 uppercase font-mono tracking-widest mt-1">Retry Error Handler</div>
+               <div className="text-white font-bold tracking-tight">Samočinná obnova</div>
+               <div className="text-[10px] text-white/30 uppercase font-mono tracking-widest mt-1">Opravný filter pri chybách</div>
             </div>
          </div>
       </div>

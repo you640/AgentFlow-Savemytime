@@ -85,7 +85,7 @@ export const GlobalSearch: React.FC = () => {
         className="flex items-center gap-3 px-4 py-2 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-all text-white/40 hover:text-white group w-64"
       >
         <Search className="w-4 h-4 group-hover:text-brand-cyan transition-colors" />
-        <span className="text-xs font-medium flex-1 text-left">Quick Search...</span>
+        <span className="text-xs font-medium flex-1 text-left">Rýchle vyhľadávanie...</span>
         <span className="text-[10px] font-mono border border-white/10 px-1.5 py-0.5 rounded opacity-50 block sm:hidden lg:block">⌘K</span>
       </button>
 
@@ -112,7 +112,7 @@ export const GlobalSearch: React.FC = () => {
                   ref={inputRef}
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Search system..." 
+                  placeholder="Vyhľadať v systéme..." 
                   className="flex-1 bg-transparent border-none focus:outline-none text-white placeholder:text-white/20 text-xl md:text-lg py-2"
                 />
                 <button 
@@ -126,13 +126,13 @@ export const GlobalSearch: React.FC = () => {
               <div className="flex-1 overflow-y-auto p-6 md:p-4 scrollbar-hide pb-24 md:pb-4">
                 {query && !hasResults && (
                   <div className="py-20 text-center">
-                    <p className="text-white/20 text-sm font-medium italic">No results found for "{query}"</p>
+                    <p className="text-white/20 text-sm font-medium italic">Nenašli sa žiadne výsledky pre "{query}"</p>
                   </div>
                 )}
 
                 {!query && (
                   <div className="py-12 md:py-8 text-center">
-                    <p className="text-white/20 text-[10px] md:text-xs font-mono uppercase tracking-[0.2em] px-4">Start typing to search workflows, integrations, or messages</p>
+                    <p className="text-white/20 text-[10px] md:text-xs font-mono uppercase tracking-[0.2em] px-4">Začnite písať pre vyhľadanie procesov, integrácií alebo správ</p>
                   </div>
                 )}
 
@@ -140,7 +140,7 @@ export const GlobalSearch: React.FC = () => {
                   <div className="mb-6">
                     <h3 className="text-[10px] font-mono text-white/20 uppercase tracking-widest mb-3 flex items-center gap-2 px-2">
                        <Workflow className="w-3 h-3" />
-                       Workflows
+                       Procesy
                     </h3>
                     <div className="space-y-1">
                       {results.workflows.map((w) => (
@@ -164,7 +164,7 @@ export const GlobalSearch: React.FC = () => {
                   <div className="mb-6">
                     <h3 className="text-[10px] font-mono text-white/20 uppercase tracking-widest mb-3 flex items-center gap-2 px-2">
                        <Blocks className="w-3 h-3" />
-                       Integrations
+                       Integrácie
                     </h3>
                     <div className="space-y-1">
                       {results.integrations.map((i) => (
@@ -188,7 +188,7 @@ export const GlobalSearch: React.FC = () => {
                   <div className="mb-2">
                     <h3 className="text-[10px] font-mono text-white/20 uppercase tracking-widest mb-3 flex items-center gap-2 px-2">
                        <Mail className="w-3 h-3" />
-                       Inbox Items
+                       Prijaté správy
                     </h3>
                     <div className="space-y-1">
                       {results.inbox.map((item) => (
@@ -217,15 +217,15 @@ export const GlobalSearch: React.FC = () => {
                 <div className="flex items-center gap-4">
                    <div className="flex items-center gap-1.5 text-[10px] text-white/20">
                       <span className="font-mono bg-white/5 px-1 rounded border border-white/10">↵</span>
-                      <span>Select</span>
+                      <span>Vybrať</span>
                    </div>
                    <div className="flex items-center gap-1.5 text-[10px] text-white/20">
                       <span className="font-mono bg-white/5 px-1 rounded border border-white/10">↑↓</span>
-                      <span>Navigate</span>
+                      <span>Pohybovať sa</span>
                    </div>
                 </div>
                 <div className="text-[10px] text-white/20 font-mono">
-                   Found {results.workflows.length + results.integrations.length + results.inbox.length} nodes
+                   Nájdených {results.workflows.length + results.integrations.length + results.inbox.length} uzlov
                 </div>
               </div>
             </motion.div>

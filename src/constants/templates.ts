@@ -16,35 +16,35 @@ export interface WorkflowTemplate {
 export const WORKFLOW_TEMPLATES: WorkflowTemplate[] = [
   {
     id: 'order-automation',
-    name: 'Order Fulfillment Pro',
-    description: 'Auto-generate invoices and logistics labels for every Shopify order.',
+    name: 'Vybavovanie objednávok',
+    description: 'Automatické generovanie faktúr a štítkov pre každú Shopify objednávku.',
     icon: ShoppingBag,
     nodes: [
-      { type: 'trigger', label: 'Shopify', sub: 'New Order', icon: ShoppingBag },
-      { type: 'action', label: 'SuperFaktura', sub: 'Create Invoice', icon: FileText },
-      { type: 'action', label: 'Packeta', sub: 'Create Shipment', icon: Truck },
+      { type: 'trigger', label: 'Shopify', sub: 'Nová objednávka', icon: ShoppingBag },
+      { type: 'action', label: 'SuperFaktura', sub: 'Vytvoriť faktúru', icon: FileText },
+      { type: 'action', label: 'Packeta', sub: 'Objednať zásielku', icon: Truck },
     ]
   },
   {
     id: 'abandoned-cart',
-    name: 'Abandoned Cart Rescue',
-    description: 'Send AI-personalized discounts to users who left items in cart.',
+    name: 'Záchrana opusteného košíka',
+    description: 'AI personalizované zľavy užívateľom, ktorí nechali tovar v košíku.',
     icon: ShoppingCart,
     nodes: [
-      { type: 'trigger', label: 'Shopify', sub: 'Cart Abandoned', icon: ShoppingCart },
-      { type: 'logic', label: 'AI Analyzer', sub: 'Value Check', icon: AlertCircle },
-      { type: 'action', label: 'Gmail', sub: 'Send Discount', icon: Mail },
+      { type: 'trigger', label: 'Shopify', sub: 'Opustený košík', icon: ShoppingCart },
+      { type: 'logic', label: 'AI Analyzátor', sub: 'Kontrola ceny', icon: AlertCircle },
+      { type: 'action', label: 'Gmail', sub: 'Odoslať zľavu', icon: Mail },
     ]
   },
   {
     id: 'support-auto-reply',
-    name: 'Smart Support Agent',
-    description: 'Auto-categorize and draft replies for common customer queries.',
+    name: 'Smart Zákaznícky Servis',
+    description: 'Automatická kategorizácia a vytváranie konceptov odpovedí pre zákazníkov.',
     icon: Mail,
     nodes: [
-      { type: 'trigger', label: 'Gmail', sub: 'New Message', icon: Mail },
-      { type: 'logic', label: 'AI Core', sub: 'Intent Check', icon: AlertCircle },
-      { type: 'action', label: 'Gmail', sub: 'Draft Auto-Reply', icon: Mail },
+      { type: 'trigger', label: 'Gmail', sub: 'Nová správa', icon: Mail },
+      { type: 'logic', label: 'AI Jadro', sub: 'Kontrola zámeru', icon: AlertCircle },
+      { type: 'action', label: 'Gmail', sub: 'Koncept odpovede', icon: Mail },
     ]
   }
 ];

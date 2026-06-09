@@ -71,10 +71,10 @@ export const Overview: React.FC = () => {
             <Clock className="w-32 h-32 text-[#00f5ff]" />
           </div>
           <div className="flex flex-col h-full">
-            <span className="text-white/40 text-[10px] font-mono uppercase tracking-[0.2em] mb-2">Time Saved Today</span>
+            <span className="text-white/40 text-[10px] font-mono uppercase tracking-[0.2em] mb-2">Dnes ušetrený čas</span>
             <div className="flex items-baseline gap-3 mt-auto">
               <span className="text-5xl font-bold text-white neon-text-cyan">{timeSavedCount}</span>
-              <span className="text-[#00f5ff] font-mono font-bold text-sm tracking-widest uppercase">Hours</span>
+              <span className="text-[#00f5ff] font-mono font-bold text-sm tracking-widest uppercase">Hodín</span>
             </div>
             <div className="mt-8 w-full h-1 bg-white/5 rounded-full overflow-hidden">
                <motion.div 
@@ -93,7 +93,7 @@ export const Overview: React.FC = () => {
           whileHover={{ y: -4, scale: 1.01 }}
           className="md:col-span-6 lg:col-span-4 glass-card p-6"
         >
-          <span className="text-white/40 text-[10px] font-mono uppercase tracking-[0.2em] mb-2">Tickets Resolved</span>
+          <span className="text-white/40 text-[10px] font-mono uppercase tracking-[0.2em] mb-2">Vyriešené požiadavky</span>
           <div className="flex items-baseline gap-2 mt-2">
             <span className="text-4xl font-bold text-white tracking-tighter">142</span>
             <div className="flex items-center gap-1 text-emerald-400 text-xs font-mono ml-auto">
@@ -102,7 +102,7 @@ export const Overview: React.FC = () => {
             </div>
           </div>
           <div className="mt-6 flex flex-wrap gap-2">
-             {['AI Resolved', 'High Utility', 'Auto-Drafted'].map((tag, i) => (
+             {['Vyriešené AI', 'Vysoká utilita', 'Auto-návrh'].map((tag, i) => (
                 <span key={i} className="px-2 py-1 bg-white/5 rounded-md text-[9px] font-mono uppercase text-white/40 tracking-wider">
                   {tag}
                 </span>
@@ -116,14 +116,14 @@ export const Overview: React.FC = () => {
           whileHover={{ y: -4, scale: 1.01 }}
           className="md:col-span-6 lg:col-span-4 glass-card p-6 border-l-4 border-l-[#a855f7]"
         >
-          <span className="text-white/40 text-[10px] font-mono uppercase tracking-[0.2em] mb-2">Revenue Guarded</span>
+          <span className="text-white/40 text-[10px] font-mono uppercase tracking-[0.2em] mb-2">Chránený obrat</span>
           <div className="flex items-baseline gap-2 mt-4">
             <span className="text-4xl font-bold text-white tracking-tighter">€1,840</span>
           </div>
           <div className="mt-6 p-3 rounded-xl bg-[#a855f7]/10 border border-[#a855f7]/20">
              <div className="flex items-center gap-2">
                 <ShieldCheck className="w-4 h-4 text-[#a855f7]" />
-                <span className="text-[10px] font-bold text-[#a855f7] uppercase tracking-widest">Auto-Upsell Active</span>
+                <span className="text-[10px] font-bold text-[#a855f7] uppercase tracking-widest">Auto-Upsell Aktívny</span>
              </div>
           </div>
         </motion.div>
@@ -132,13 +132,13 @@ export const Overview: React.FC = () => {
         <motion.div variants={item} className="md:col-span-12 lg:col-span-8 glass-card p-4 md:p-8">
           <div className="flex justify-between items-center mb-10">
             <div>
-               <h3 className="text-xl font-bold tracking-tight">System Performance</h3>
-               <p className="text-white/30 text-xs mt-1 uppercase tracking-widest font-mono">Real-time Efficiency Metrics</p>
+               <h3 className="text-xl font-bold tracking-tight">Výkon systému</h3>
+               <p className="text-white/30 text-xs mt-1 uppercase tracking-widest font-mono">Metriky efektivity v reálnom čase</p>
             </div>
             <div className="flex gap-4 hidden sm:flex">
               <div className="flex items-center gap-2 group cursor-pointer">
                  <div className="w-2 h-2 rounded-full bg-[#00f5ff] shadow-[0_0_8px_#00f5ff]" />
-                 <span className="text-[10px] font-mono uppercase tracking-widest text-[#00f5ff]">Optimization Hours</span>
+                 <span className="text-[10px] font-mono uppercase tracking-widest text-[#00f5ff]">Hodiny optimalizácie</span>
               </div>
             </div>
           </div>
@@ -186,14 +186,14 @@ export const Overview: React.FC = () => {
         <motion.div variants={item} className="md:col-span-12 lg:col-span-4 glass-card p-6 md:p-8 flex flex-col">
           <h3 className="text-lg font-bold mb-8 flex items-center gap-3">
             <Zap className="w-5 h-5 text-[#a855f7]" />
-            Live Event Log
+            Denník live udalostí
           </h3>
           <div className="space-y-8 relative flex-1 before:absolute before:left-[1px] before:top-2 before:bottom-2 before:w-[px] before:bg-white/5">
             {[ 
               { title: "Spracovanie faktúr", subtitle: "SuperFaktura +3", time: "2 min", icon: ShieldCheck, color: "text-emerald-400" },
               { title: "Logistika: Packeta", subtitle: "Zvoz objednaný", time: "12 min", icon: Package, color: "text-blue-400" },
-              { title: "Support Ticket", subtitle: "AI Draft: Sent", time: "1 hod", icon: MessageSquare, color: "text-[#a855f7]" },
-              { title: "Shopify Sync", subtitle: "Stock updated", time: "2 hod", icon: Zap, color: "text-[#00f5ff]" },
+              { title: "Support Ticket", subtitle: "AI Návrh: Odoslaný", time: "1 hod", icon: MessageSquare, color: "text-[#a855f7]" },
+              { title: "Shopify Sync", subtitle: "Sklad aktualizovaný", time: "2 hod", icon: Zap, color: "text-[#00f5ff]" },
             ].map((item, i) => (
               <div key={i} className="pl-6 relative">
                 <div className={cn("absolute left-[-4px] top-1.5 w-2 h-2 rounded-full", item.color.replace('text', 'bg'))} />
@@ -216,10 +216,10 @@ export const Overview: React.FC = () => {
               }}
             >
               <Zap className="w-3 h-3 text-brand-cyan" />
-              Simulate AI Event
+              Simulovať AI udalosť
             </button>
             <button className="w-full py-4 rounded-2xl bg-white/[0.03] border border-white/5 text-[10px] font-mono uppercase tracking-[0.2em] font-bold text-white/40 hover:text-white transition-colors">
-              View History
+              Zobraziť históriu
             </button>
           </div>
         </motion.div>

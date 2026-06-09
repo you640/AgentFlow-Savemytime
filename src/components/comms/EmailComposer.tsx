@@ -48,7 +48,7 @@ export const EmailComposer: React.FC = () => {
     setTimeout(() => {
       setFormData(prev => ({
         ...prev,
-        body: prev.body + "\n\nAI SUGGESTION: I've reviewed your request regarding the shipping delay. We are currently coordinating with our logistics partner (Packeta) to expedite the delivery. Your tracking number remains active."
+        body: prev.body + "\n\nNÁVRH AI: Preverili sme vašu požiadavku ohľadom oneskorenia dopravy. Momentálne koordinujeme doručenie s naším logistickým partnerom (Packeta), aby sme doručenie urýchlili. Vaše podacie číslo zásielky je stále aktívne."
       }));
       setIsAIGenerating(false);
     }, 1200);
@@ -59,12 +59,12 @@ export const EmailComposer: React.FC = () => {
       <header className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
           <h2 className="text-3xl font-bold tracking-tight text-white flex items-center gap-3">
-            Comms Center
+            Komunikačné centrum
             <span className="text-brand-purple text-[10px] font-mono border border-brand-purple/30 px-2 py-0.5 rounded uppercase tracking-widest leading-none">
-              SMTP Active
+              SMTP Aktívne
             </span>
           </h2>
-          <p className="text-white/40 text-xs mt-1 uppercase tracking-widest font-mono">Draft high-priority customer responses</p>
+          <p className="text-white/40 text-xs mt-1 uppercase tracking-widest font-mono">Pripravujte dôležité odpovede pre zákazníkov</p>
         </div>
       </header>
 
@@ -82,8 +82,8 @@ export const EmailComposer: React.FC = () => {
                 <CheckCircle2 className="w-10 h-10 text-emerald-400" />
               </div>
               <div>
-                <h3 className="text-2xl font-bold text-white">Message Dispatched</h3>
-                <p className="text-white/40 mt-2">Your email has been sent via AutoOps SMTP relay.</p>
+                <h3 className="text-2xl font-bold text-white">Správa odoslaná</h3>
+                <p className="text-white/40 mt-2">Váš e-mail bol úspešne odoslaný cez AutoOps SMTP bránu.</p>
               </div>
             </motion.div>
           ) : (
@@ -98,7 +98,7 @@ export const EmailComposer: React.FC = () => {
                   <div className="w-8 h-8 rounded-lg bg-brand-purple/20 flex items-center justify-center">
                     <Mail className="w-4 h-4 text-brand-purple" />
                   </div>
-                  <span className="text-sm font-bold text-white">New Outbound Message</span>
+                  <span className="text-sm font-bold text-white">Nová odchádzajúca správa</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <button className="p-2 hover:bg-white/5 rounded-lg text-white/40 transition-colors"><Maximize2 className="w-4 h-4" /></button>
@@ -115,7 +115,7 @@ export const EmailComposer: React.FC = () => {
                       required
                       value={formData.to}
                       onChange={(e) => setFormData({ ...formData, to: e.target.value })}
-                      placeholder="customer@example.com"
+                      placeholder="zakaznik@priklad.sk"
                       className="flex-1 bg-transparent border-none focus:outline-none text-white text-sm font-medium"
                     />
                     <div className="flex gap-2">
@@ -131,7 +131,7 @@ export const EmailComposer: React.FC = () => {
                       required
                       value={formData.subject}
                       onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                      placeholder="Order #4492 - Resolution"
+                      placeholder="Objednávka #4492 - Riešenie"
                       className="flex-1 bg-transparent border-none focus:outline-none text-white text-sm font-medium"
                     />
                   </div>
@@ -141,7 +141,7 @@ export const EmailComposer: React.FC = () => {
                       required
                       value={formData.body}
                       onChange={(e) => setFormData({ ...formData, body: e.target.value })}
-                      placeholder="Type your message or use AI to draft..."
+                      placeholder="Napíšte správu alebo použite AI na vytvorenie návrhu..."
                       className="w-full h-64 md:h-80 bg-transparent border-none focus:outline-none text-white text-sm leading-relaxed resize-none scrollbar-hide"
                     />
                     
@@ -155,7 +155,7 @@ export const EmailComposer: React.FC = () => {
                         >
                            <div className="flex items-center gap-3 bg-white/10 px-4 py-2 rounded-full border border-white/10 shadow-xl">
                               <Sparkles className="w-4 h-4 text-brand-cyan animate-pulse" />
-                              <span className="text-xs font-mono text-brand-cyan">AI is thinking...</span>
+                              <span className="text-xs font-mono text-brand-cyan">AI premýšľa...</span>
                            </div>
                         </motion.div>
                       )}
@@ -175,7 +175,7 @@ export const EmailComposer: React.FC = () => {
                       className="flex items-center gap-2 px-4 py-2 rounded-xl bg-brand-cyan/10 border border-brand-cyan/20 text-brand-cyan text-xs font-bold hover:bg-brand-cyan/20 transition-all uppercase tracking-widest"
                     >
                       <Sparkles className="w-3 h-3" />
-                      Magic Draft
+                      Kúzelný AI Návrh
                     </button>
                   </div>
 
@@ -198,7 +198,7 @@ export const EmailComposer: React.FC = () => {
                         ) : (
                           <Send className="w-4 h-4" />
                         )}
-                        {isSending ? 'Sending...' : 'Send Message'}
+                        {isSending ? 'Odosiela sa...' : 'Odoslať správu'}
                       </button>
                       <div className="w-[1px] h-full bg-black/10" />
                       <button type="button" className="px-3 py-3 hover:bg-black/10 transition-colors">
@@ -219,8 +219,8 @@ export const EmailComposer: React.FC = () => {
             <Zap className="w-5 h-5 text-brand-cyan" />
           </div>
           <div>
-            <h4 className="font-bold text-white text-sm">Real-time CRM Sync</h4>
-            <p className="text-white/30 text-[10px] uppercase font-mono tracking-widest mt-1">Updates Shopify & Instagram threads</p>
+            <h4 className="font-bold text-white text-sm">Zosynchronizované s CRM</h4>
+            <p className="text-white/30 text-[10px] uppercase font-mono tracking-widest mt-1">Aktualizuje vlákna v Shopify a Instagrame</p>
           </div>
         </div>
         <div className="glass-card p-6 flex items-start gap-4 border-l-2 border-brand-purple">
@@ -228,8 +228,8 @@ export const EmailComposer: React.FC = () => {
             <Sparkles className="w-5 h-5 text-brand-purple" />
           </div>
           <div>
-            <h4 className="font-bold text-white text-sm">Policy Guard Active</h4>
-            <p className="text-white/30 text-[10px] uppercase font-mono tracking-widest mt-1">Scanning for PII & tone compliance</p>
+            <h4 className="font-bold text-white text-sm">Ochrana tónu a údajov</h4>
+            <p className="text-white/30 text-[10px] uppercase font-mono tracking-widest mt-1">Skenuje tón komunikácie a osobné údaje (PII)</p>
           </div>
         </div>
       </div>

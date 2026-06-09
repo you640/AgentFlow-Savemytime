@@ -28,7 +28,7 @@ export const TemplateLibrary: React.FC<TemplateLibraryProps> = ({ onSelect }) =>
     <div className="space-y-6">
       <div className="flex items-center gap-3">
         <Sparkles className="w-5 h-5 text-brand-cyan" />
-        <h3 className="text-lg font-bold">Standard Blueprints</h3>
+        <h3 className="text-lg font-bold">Štandardné šablóny</h3>
       </div>
       
       <motion.div 
@@ -64,7 +64,7 @@ export const TemplateLibrary: React.FC<TemplateLibraryProps> = ({ onSelect }) =>
                 ))}
               </div>
               <button className="text-[10px] uppercase font-bold text-brand-cyan flex items-center gap-1 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
-                Deploy <ArrowRight className="w-3 h-3" />
+                Nasadiť <ArrowRight className="w-3 h-3" />
               </button>
             </div>
           </motion.div>

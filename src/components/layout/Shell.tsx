@@ -22,12 +22,12 @@ import { requestNotificationPermission, simulateIncomingEvent } from '../../serv
 import { GlobalSearch } from './GlobalSearch';
 
 const navItems = [
-  { path: '/', label: 'Dashboard', icon: LayoutDashboard },
-  { path: '/comms', label: 'Compose', icon: Plus },
+  { path: '/', label: 'Prehľad', icon: LayoutDashboard },
+  { path: '/comms', label: 'Comms', icon: Plus },
   { path: '/inbox', label: 'Inbox', icon: Mail },
-  { path: '/workflows', label: 'Workflows', icon: Workflow },
-  { path: '/analytics', label: 'Analytics', icon: LineChart },
-  { path: '/integrations', label: 'Integrations', icon: Blocks },
+  { path: '/workflows', label: 'Procesy', icon: Workflow },
+  { path: '/analytics', label: 'Analytika', icon: LineChart },
+  { path: '/integrations', label: 'Integrácie', icon: Blocks },
 ];
 
 export const Shell: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -38,7 +38,7 @@ export const Shell: React.FC<{ children: React.ReactNode }> = ({ children }) => 
     typeof Notification !== 'undefined' ? Notification.permission : 'default'
   );
 
-  const activeLabel = navItems.find(item => item.path === location.pathname)?.label || 'System';
+  const activeLabel = navItems.find(item => item.path === location.pathname)?.label || 'Systém';
 
   const handleRequestNotifications = async () => {
     const granted = await requestNotificationPermission();
@@ -97,7 +97,7 @@ export const Shell: React.FC<{ children: React.ReactNode }> = ({ children }) => 
         <div className="mt-auto mb-8 w-full px-4">
            {!isSidebarCollapsed && (
              <div className="p-4 rounded-2xl bg-white/5 border border-white/5 mb-4">
-                <div className="text-[10px] font-mono text-white/40 uppercase mb-2">Connected Store</div>
+                <div className="text-[10px] font-mono text-white/40 uppercase mb-2">Prepojený E-shop</div>
                 <div className="flex items-center gap-2">
                    <div className="w-2 h-2 rounded-full bg-emerald-500" />
                    <span className="text-xs font-bold">Shopify Pro</span>
@@ -111,7 +111,7 @@ export const Shell: React.FC<{ children: React.ReactNode }> = ({ children }) => 
             {isSidebarCollapsed ? <ChevronRight className="w-6 h-6" /> : (
               <>
                 <ChevronLeft className="w-6 h-6" />
-                <span>Collapse</span>
+                <span>Skryť menu</span>
               </>
             )}
           </button>
@@ -148,7 +148,7 @@ export const Shell: React.FC<{ children: React.ReactNode }> = ({ children }) => 
                 </span>
               </h1>
               <p className="text-white/40 text-[10px] md:text-[11px] mt-1 uppercase tracking-widest font-medium hidden sm:block">
-                Autonomous Operations Agent • 2026
+                Autonómny operačný agent • 2026
               </p>
             </div>
             {/* Logo for mobile only in header */}
@@ -177,7 +177,7 @@ export const Shell: React.FC<{ children: React.ReactNode }> = ({ children }) => 
                
                <div className="hidden lg:flex items-center gap-3 bg-white/[0.03] border border-white/10 px-4 py-2.5 rounded-xl backdrop-blur-md">
                   <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></div>
-                  <span className="text-[10px] font-mono font-bold text-emerald-400 uppercase tracking-wider">Fully Autonomous</span>
+                  <span className="text-[10px] font-mono font-bold text-emerald-400 uppercase tracking-wider">Plne Autonómny</span>
                </div>
              </div>
           </div>
@@ -236,8 +236,8 @@ const AgentOrb = () => {
             exit={{ opacity: 0, y: 10, scale: 0.8 }}
             className="absolute bottom-20 right-0 w-64 glass-card p-4 text-sm"
           >
-            <p className="text-brand-cyan font-mono text-xs uppercase mb-1">Active Operation</p>
-            <p className="text-white font-medium">{agentStatus.task || 'Processing data nodes...'}</p>
+            <p className="text-brand-cyan font-mono text-xs uppercase mb-1">Aktívna Operácia</p>
+            <p className="text-white font-medium">{agentStatus.task || 'Spracovávam dátové uzly...'}</p>
           </motion.div>
         )}
       </AnimatePresence>

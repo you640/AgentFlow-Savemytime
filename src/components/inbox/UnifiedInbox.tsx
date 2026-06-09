@@ -32,16 +32,16 @@ export const UnifiedInbox: React.FC = () => {
       <div className="px-8 py-6 border-b border-white/5 flex justify-between items-center bg-[#0a0a0f]">
         <div>
           <h2 className="text-xl font-bold flex items-center gap-3">
-            Priority Inbox
+            Prioritný Inbox
             <span className="text-[10px] font-mono bg-[#a855f7]/20 text-[#a855f7] px-3 py-1 rounded-full uppercase tracking-tighter">
-              3 New Responses
+              3 Nové Odpovede
             </span>
           </h2>
-          <p className="text-white/20 text-[10px] uppercase tracking-widest font-mono mt-1">Cross-platform Customer Intelligence</p>
+          <p className="text-white/20 text-[10px] uppercase tracking-widest font-mono mt-1">Komunikácia zo všetkých platforiem</p>
         </div>
         <button className="px-5 py-2 rounded-xl bg-[#00f5ff]/10 text-[#00f5ff] text-xs font-bold hover:bg-[#00f5ff]/20 transition-all flex items-center gap-2 border border-[#00f5ff]/20 neon-glow-cyan">
            <Sparkles className="w-4 h-4" />
-           Smart Sort
+           Inteligentné triedenie
         </button>
       </div>
       
@@ -66,7 +66,7 @@ export const UnifiedInbox: React.FC = () => {
               <div className="flex-1 min-w-0 flex flex-col justify-center">
                  <div className="flex justify-between items-baseline mb-1">
                     <span className="font-bold text-sm text-white tracking-tight">{item.sender}</span>
-                    <span className="text-[10px] text-white/20 font-mono italic tracking-tighter">{item.time} ago</span>
+                    <span className="text-[10px] text-white/20 font-mono italic tracking-tighter">{item.time === 'Včera' ? 'Včera' : `o ${item.time}`}</span>
                  </div>
                  <div className="text-sm font-semibold text-white/80 line-clamp-1 truncate">{item.title}</div>
                  <div className="text-xs text-white/30 line-clamp-1 italic mt-1 font-medium italic">"{item.preview}"</div>
@@ -77,7 +77,7 @@ export const UnifiedInbox: React.FC = () => {
                    "text-[9px] uppercase tracking-[0.1em] font-bold px-3 py-1 rounded-lg border", 
                    categoryStyles[item.category]
                  )}>
-                    {item.category === 'auto-resolved' ? 'System Cleared' : item.category}
+                    {item.category === 'auto-resolved' ? 'Vyriešené AI' : item.category === 'high' ? 'Vysoká' : item.category === 'medium' ? 'Stredná' : 'Nízka'}
                  </span>
                  {item.category === 'auto-resolved' && (
                     <motion.div 
@@ -87,7 +87,7 @@ export const UnifiedInbox: React.FC = () => {
                       className="flex items-center gap-1.5 text-emerald-400 text-[10px] font-bold uppercase tracking-wider"
                     >
                        <CheckCircle2 className="w-3.5 h-3.5" />
-                       <span>AI Handled</span>
+                       <span>Spracované AI</span>
                     </motion.div>
                  )}
               </div>
@@ -98,7 +98,7 @@ export const UnifiedInbox: React.FC = () => {
       
       <div className="p-4 bg-white/[0.01] text-center border-t border-white/5">
          <button className="text-[9px] font-mono text-white/20 hover:text-white transition-colors uppercase tracking-widest">
-           Archive Cleared Conversations
+           Archivovať vyriešené konverzácie
          </button>
       </div>
     </div>
