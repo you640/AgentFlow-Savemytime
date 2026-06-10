@@ -64,17 +64,17 @@ export const IntegrationsGrid: React.FC = () => {
     <div className="space-y-8">
       <header className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-          <h2 className="text-3xl font-bold tracking-tight text-white">Integrations Hub</h2>
-          <p className="text-white/30 text-xs mt-1 uppercase tracking-widest font-mono">Link your small business logic ecosystem</p>
+          <h2 className="text-3xl font-bold tracking-tight text-white">Integračné centrum</h2>
+          <p className="text-white/30 text-xs mt-1 uppercase tracking-widest font-mono">Prepojte ekosystém vášho podnikania</p>
         </div>
         <div className="flex items-center gap-3 w-full md:w-auto">
            <div className="hidden lg:flex bg-white/5 border border-white/10 px-6 py-2.5 rounded-xl items-center gap-3">
               <Globe className="w-4 h-4 text-[#00f5ff]" />
-              <span className="text-[10px] uppercase font-mono tracking-tighter text-[#00f5ff] font-bold">All Nodes Active</span>
+              <span className="text-[10px] uppercase font-mono tracking-tighter text-[#00f5ff] font-bold">Všetky prepojenia aktívne</span>
            </div>
            <button className="flex-1 md:flex-none px-6 py-3 bg-white/5 border border-white/10 rounded-xl text-white font-bold text-xs hover:bg-white/10 transition-colors flex items-center justify-center gap-2">
               <Plus className="w-4 h-4" />
-              Request Sync
+              Synchronizovať
            </button>
         </div>
       </header>
@@ -128,7 +128,7 @@ export const IntegrationsGrid: React.FC = () => {
                   ? "bg-white/5 text-white/40 hover:bg-white/10 hover:text-white" 
                   : "bg-[#00f5ff]/10 text-[#00f5ff] hover:bg-[#00f5ff]/20 border border-[#00f5ff]/20"
               )}>
-                 {integration.status === 'connected' ? 'Open Module' : 'Sync Connector'}
+                 {integration.status === 'connected' ? 'Otvoriť modul' : 'Prepojiť modul'}
                  <ExternalLink className="w-3 h-3" />
               </button>
             </motion.div>
@@ -143,8 +143,8 @@ export const IntegrationsGrid: React.FC = () => {
               <Plus className="w-8 h-8 text-white/20 group-hover:text-[#00f5ff]" />
            </div>
            <div className="text-center">
-              <span className="text-[10px] font-bold uppercase tracking-widest text-white/30 group-hover:text-[#00f5ff]">New Integration</span>
-              <p className="text-[10px] text-white/10 mt-1">Connect your supply chain AI</p>
+              <span className="text-[10px] font-bold uppercase tracking-widest text-white/30 group-hover:text-[#00f5ff]">Nová integrácia</span>
+              <p className="text-[10px] text-white/10 mt-1">Prepojte svoje dodávateľské služby</p>
            </div>
         </motion.div>
       </motion.div>

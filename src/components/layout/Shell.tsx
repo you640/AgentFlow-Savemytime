@@ -13,7 +13,8 @@ import {
   Circle,
   Bell,
   BellOff,
-  Plus
+  Plus,
+  Palette
 } from 'lucide-react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { useStore } from '../../store/useStore';
@@ -28,6 +29,7 @@ const navItems = [
   { path: '/workflows', label: 'Procesy', icon: Workflow },
   { path: '/analytics', label: 'Analytika', icon: LineChart },
   { path: '/integrations', label: 'Integrácie', icon: Blocks },
+  { path: '/components', label: 'Dizajn', icon: Palette },
 ];
 
 export const Shell: React.FC<{ children: React.ReactNode }> = ({ children }) => {
