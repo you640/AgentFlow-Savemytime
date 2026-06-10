@@ -2,5 +2,7 @@
   "name": "AutoOps AI",
   "description": "Autonomous Operations Agent for small e-shops and SMBs. Automate emails, invoices, and logistics.",
   "requestFramePermissions": [],
-  "majorCapabilities": []
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }
