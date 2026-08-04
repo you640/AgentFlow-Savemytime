@@ -32,7 +32,7 @@ import { InboxItem } from '../../types';
 
 const sourceIcons = {
   gmail: Mail,
-  shopify: ShoppingBag,
+  eshop: ShoppingBag,
   instagram: Instagram,
   support: MessageCircle,
 };
@@ -116,8 +116,8 @@ const ENRICHED_MOCK_ITEMS: ExtendedInboxItem[] = [
   },
   {
     id: '2',
-    source: 'shopify',
-    sender: 'Shopify System',
+    source: 'eshop',
+    sender: 'E-shop System',
     title: 'Nová objednávka #8821',
     preview: 'Zákazník vybral platbu vopred, čakáme na úhradu.',
     time: '13:10',
@@ -129,7 +129,7 @@ const ENRICHED_MOCK_ITEMS: ExtendedInboxItem[] = [
     messages: [
       {
         id: '2-1',
-        senderName: 'Shopify System',
+        senderName: 'E-shop System',
         isMe: false,
         body: 'Nová objednávka #8821 od zákazníka Petra M. (petra.m@azet.sk). Suma: 84.90 EUR - Čaká sa na platbu prevodom na účet.',
         timestamp: '13:00'
@@ -219,8 +219,8 @@ const ENRICHED_MOCK_ITEMS: ExtendedInboxItem[] = [
   },
   {
     id: '5',
-    source: 'shopify',
-    sender: 'Shopify Invoice Bot',
+    source: 'eshop',
+    sender: 'E-shop Invoice Bot',
     title: 'Mesačná faktúra #INV-2026-06',
     preview: 'Spracovaná platba za mesačné predplatné pre eshop.',
     time: '08. Jún',
@@ -232,9 +232,9 @@ const ENRICHED_MOCK_ITEMS: ExtendedInboxItem[] = [
     messages: [
       {
         id: '5-1',
-        senderName: 'Shopify Invoice Bot',
+        senderName: 'E-shop Invoice Bot',
         isMe: false,
-        body: 'Mesačné vyúčtovanie za Shopify služby pre obchod bolo úspešne strhnuté z Vašej pridanej karty vo výške $39.00 USD. Faktúra #INV-2026-06 je priložená k stiahnutiu.',
+        body: 'Mesačné vyúčtovanie za služby e-shop platformy pre obchod bolo úspešne strhnuté z Vašej pridanej karty vo výške $39.00 USD. Faktúra #INV-2026-06 je priložená k stiahnutiu.',
         timestamp: '08. Jún 09:15'
       }
     ]

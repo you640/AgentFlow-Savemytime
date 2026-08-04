@@ -102,7 +102,7 @@ export const Shell: React.FC<{ children: React.ReactNode }> = ({ children }) => 
                 <div className="text-[10px] font-mono text-white/40 uppercase mb-2">Prepojený E-shop</div>
                 <div className="flex items-center gap-2">
                    <div className="w-2 h-2 rounded-full bg-emerald-500" />
-                   <span className="text-xs font-bold">Shopify Pro</span>
+                   <span className="text-xs font-bold">E-shop Pro</span>
                 </div>
              </div>
            )}

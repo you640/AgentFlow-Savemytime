@@ -41,7 +41,7 @@ export const simulateIncomingEvent = (type: 'task' | 'error' | 'message') => {
     },
     error: {
       title: 'Agent Attention Required ⚠️',
-      body: 'Shopify API returned a 401. Re-authentication might be needed.',
+      body: 'E-shop API returned a 401. Re-authentication might be needed.',
     },
     message: {
       title: 'Urgent Message 📩',

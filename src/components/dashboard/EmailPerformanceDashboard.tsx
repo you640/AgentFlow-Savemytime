@@ -51,7 +51,7 @@ interface SentCommunication {
   subject: string;
   recipient: string;
   sentAt: string;
-  source: 'gmail' | 'shopify' | 'support' | 'custom';
+  source: 'gmail' | 'eshop' | 'support' | 'custom';
   openRate: number; // in %
   clickRate: number; // in %
   responseTimeSeconds: number; // average response time to customer reply
@@ -66,7 +66,7 @@ const INITIAL_SENT_COMMUNICATIONS: SentCommunication[] = [
     subject: 'Potvrdenie zmeny doručovacej adresy - Objednávka #1233',
     recipient: 'milan.k@azet.sk',
     sentAt: '2026-06-10 14:20',
-    source: 'shopify',
+    source: 'eshop',
     openRate: 98,
     clickRate: 15,
     responseTimeSeconds: 300, // 5 min
@@ -79,7 +79,7 @@ const INITIAL_SENT_COMMUNICATIONS: SentCommunication[] = [
     subject: 'Platobné inštrukcie k objednávke #8821',
     recipient: 'petra.m@azet.sk',
     sentAt: '2026-06-10 13:10',
-    source: 'shopify',
+    source: 'eshop',
     openRate: 92,
     clickRate: 85,
     responseTimeSeconds: 600, // 10 min
@@ -131,7 +131,7 @@ const INITIAL_SENT_COMMUNICATIONS: SentCommunication[] = [
     subject: 'Zásielka z Vášho obchodu bola odovzdaná prepravcovi Packeta',
     recipient: 'kovac.peter@gmail.com',
     sentAt: '2026-06-08 16:45',
-    source: 'shopify',
+    source: 'eshop',
     openRate: 85,
     clickRate: 78,
     responseTimeSeconds: 120, // 2 min
@@ -205,7 +205,7 @@ export const EmailPerformanceDashboard: React.FC = () => {
   const [simSubject, setSimSubject] = useState('');
   const [simTemplate, setSimTemplate] = useState('Zmena doručenia');
   const [simRecipient, setSimRecipient] = useState('');
-  const [simSource, setSimSource] = useState<'gmail' | 'shopify' | 'support' | 'custom'>('support');
+  const [simSource, setSimSource] = useState<'gmail' | 'eshop' | 'support' | 'custom'>('support');
   const [simStatus, setSimStatus] = useState<'opened' | 'clicked' | 'delivered'>('clicked');
   const [simMessageText, setSimMessageText] = useState('Dobrý deň, dopyt ohľadom doručenia balíka bol spracovaný naším AutoOps agentom.');
 
@@ -273,7 +273,7 @@ export const EmailPerformanceDashboard: React.FC = () => {
     });
 
     return Object.keys(counts).map(key => ({
-      name: key === 'gmail' ? 'Gmail Direct' : key === 'shopify' ? 'Shopify Trigger' : key === 'support' ? 'Support Ticket' : 'Custom Webhook',
+      name: key === 'gmail' ? 'Gmail Direct' : key === 'eshop' ? 'E-shop Trigger' : key === 'support' ? 'Support Ticket' : 'Custom Webhook',
       value: counts[key]
     }));
   }, [filteredCommunications]);
@@ -401,7 +401,7 @@ export const EmailPerformanceDashboard: React.FC = () => {
             className="bg-[#050507] text-white border border-white/10 px-3 py-2 rounded-xl text-xs focus:outline-none focus:border-[#00f5ff] transition-colors cursor-pointer"
           >
             <option value="all">Všetky kanály</option>
-            <option value="shopify">Shopify Triggers</option>
+            <option value="eshop">E-shop Triggers</option>
             <option value="gmail">Klientský Gmail</option>
             <option value="support">Enquiry Support (AI)</option>
             <option value="custom">Manuálne rozhranie</option>
@@ -1103,7 +1103,7 @@ export const EmailPerformanceDashboard: React.FC = () => {
                         className="w-full bg-[#050507] border border-white/10 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-[#00f5ff] transition-colors"
                       >
                         <option value="support">AI Enquiry Spark Support</option>
-                        <option value="shopify">Shopify Transactional</option>
+                        <option value="eshop">E-shop Transactional</option>
                         <option value="gmail">Gmail Outreach</option>
                         <option value="custom">Manuálna odpoveď</option>
                       </select>

@@ -193,7 +193,7 @@ export const Overview: React.FC = () => {
               { title: "Spracovanie faktúr", subtitle: "SuperFaktura +3", time: "2 min", icon: ShieldCheck, color: "text-emerald-400" },
               { title: "Logistika: Packeta", subtitle: "Zvoz objednaný", time: "12 min", icon: Package, color: "text-blue-400" },
               { title: "Support Ticket", subtitle: "AI Návrh: Odoslaný", time: "1 hod", icon: MessageSquare, color: "text-[#a855f7]" },
-              { title: "Shopify Sync", subtitle: "Sklad aktualizovaný", time: "2 hod", icon: Zap, color: "text-[#00f5ff]" },
+              { title: "E-shop Sync", subtitle: "Sklad aktualizovaný", time: "2 hod", icon: Zap, color: "text-[#00f5ff]" },
             ].map((item, i) => (
               <div key={i} className="pl-6 relative">
                 <div className={cn("absolute left-[-4px] top-1.5 w-2 h-2 rounded-full", item.color.replace('text', 'bg'))} />

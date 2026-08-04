@@ -16,7 +16,6 @@ import {
   FileText,
   Instagram
 } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
 import { cn } from '../../lib/utils';
 import { INTEGRATIONS } from '../../constants/integrations';
 
@@ -48,12 +47,8 @@ const item = {
 };
 
 export const IntegrationsGrid: React.FC = () => {
-  const navigate = useNavigate();
-
-  const handleOpenModule = (id: string, status: 'connected' | 'disconnected') => {
-    if (id === '1' && status === 'connected') {
-      navigate('/shopify');
-    } else if (status === 'connected') {
+  const handleOpenModule = (_id: string, status: 'connected' | 'disconnected') => {
+    if (status === 'connected') {
       alert('Tento modul je spravovaný plne autonómnym AI agentom bez potreby manuálneho zásahu.');
     } else {
       alert('Tento integrátor zatiaľ nie je aktívny. Pre synchronizáciu prepojte API kľúče.');
