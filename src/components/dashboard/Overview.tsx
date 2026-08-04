@@ -22,7 +22,7 @@ import {
   AreaChart,
   Area 
 } from 'recharts';
-import { useStore } from '../../store/useStore';
+import { useStore, HOURS_PER_EARNED_DAY } from '../../store/useStore';
 import { cn } from '../../lib/utils';
 
 
@@ -84,7 +84,7 @@ export const Overview: React.FC = () => {
               <h3 className="text-lg md:text-xl font-bold text-white tracking-tight">
                 {hasEarnedDay
                   ? 'Agent ti zarobil deň voľna. Aktivuj ho →'
-                  : `Ešte ${Math.round((8 - autopilot.hoursBanked) * 10) / 10} h a máš deň voľna`}
+                  : `Ešte ${Math.round((HOURS_PER_EARNED_DAY - autopilot.hoursBanked) * 10) / 10} h a máš deň voľna`}
               </h3>
               <p className="text-white/40 text-xs mt-1">
                 Nechaj agenta riadiť celý e-shop a venuj čas tomu, na čom naozaj záleží.

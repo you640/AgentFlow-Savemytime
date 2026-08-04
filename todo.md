@@ -29,6 +29,16 @@ objednávky, faktúry a zákazníkov, a večer pošle **jednu vetu** so súhrnom
 - [x] CTA karta na Prehľade (Overview) prepojená na Autopilota
 - [x] `npm run lint` (tsc) prechádza bez chýb + `npm run build` prechádza
 
+### Polish A → Z ✅
+- [x] Perzistencia stavu cez `zustand/persist` (localStorage) — prežije refresh
+- [x] Emočný payoff: prepočet času na „životné momenty" (`lib/lifeMoments.ts`)
+- [x] Aktívny režim: čas štartu + uplynutý čas behu
+- [x] Prístupnosť: Escape zavrie súhrn, `role="dialog"`, ARIA, focus, `progressbar`
+- [x] Rešpekt `prefers-reduced-motion` (vypne slučkové animácie)
+- [x] Feedback „+Xh do banky" pri demo + `aria-live`
+- [x] Mobilné doladenie hlavičky a tlačidiel
+- [x] Overené: `tsc` ✅ · `vite build` ✅ · dev server + SPA route render ✅
+
 ### Ďalšie kroky (backlog)
 - [ ] Napojiť „banku času" na reálne akcie agenta (nie demo tlačidlo)
 - [ ] Zápis reálneho súhrnu dňa do inboxu / e-mailu majiteľovi

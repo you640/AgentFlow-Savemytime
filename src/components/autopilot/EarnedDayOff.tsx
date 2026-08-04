@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import {
   Plane,
   Sparkles,
@@ -10,9 +10,11 @@ import {
   Bot,
   Play,
   PartyPopper,
+  Heart,
 } from 'lucide-react';
 import { useStore, HOURS_PER_EARNED_DAY } from '../../store/useStore';
 import { cn } from '../../lib/utils';
+import { lifeMomentsText } from '../../lib/lifeMoments';
 import { sendNotification } from '../../services/notificationService';
 
 // Správy, ktoré agent "vybavuje" počas aktívneho dňa voľna
@@ -37,6 +39,13 @@ const randOrder = () => Math.floor(1000 + Math.random() * 9000);
 const nowTime = () =>
   new Date().toLocaleTimeString('sk-SK', { hour: '2-digit', minute: '2-digit' });
 
+const formatElapsed = (ms: number) => {
+  const totalMin = Math.max(0, Math.floor(ms / 60000));
+  const h = Math.floor(totalMin / 60);
+  const m = totalMin % 60;
+  return h > 0 ? `${h}h ${m}m` : `${m}m`;
+};
+
 // Kruhový progress k ďalšiemu dňu voľna
 const ProgressRing: React.FC<{ percent: number; label: string; sub: string }> = ({
   percent,
@@ -47,8 +56,15 @@ const ProgressRing: React.FC<{ percent: number; label: string; sub: string }> = 
   const circ = 2 * Math.PI * r;
   const offset = circ * (1 - Math.min(percent, 100) / 100);
   return (
-    <div className="relative w-[190px] h-[190px]">
-      <svg className="w-full h-full -rotate-90" viewBox="0 0 190 190">
+    <div
+      className="relative w-[190px] h-[190px]"
+      role="progressbar"
+      aria-valuenow={Math.round(percent)}
+      aria-valuemin={0}
+      aria-valuemax={100}
+      aria-label="Postup k ďalšiemu dňu voľna"
+    >
+      <svg className="w-full h-full -rotate-90" viewBox="0 0 190 190" aria-hidden="true">
         <circle cx="95" cy="95" r={r} fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="10" />
         <motion.circle
           cx="95"
@@ -81,9 +97,15 @@ const ProgressRing: React.FC<{ percent: number; label: string; sub: string }> = 
 
 export const EarnedDayOff: React.FC = () => {
   const { autopilot, bankTime, activateDayOff, logHandledTask, endDayOff } = useStore();
+  const reduceMotion = useReducedMotion();
+
   const [feed, setFeed] = useState<FeedItem[]>([]);
   const [summaryHandled, setSummaryHandled] = useState<number | null>(null);
+  const [lastBank, setLastBank] = useState<number | null>(null);
+  const [elapsed, setElapsed] = useState('0m');
   const feedId = useRef(0);
+  const bankTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const closeBtnRef = useRef<HTMLButtonElement>(null);
 
   const percent = (autopilot.hoursBanked / HOURS_PER_EARNED_DAY) * 100;
   const hoursLeft = Math.round((HOURS_PER_EARNED_DAY - autopilot.hoursBanked) * 10) / 10;
@@ -100,6 +122,31 @@ export const EarnedDayOff: React.FC = () => {
     }, 2500);
     return () => clearInterval(interval);
   }, [autopilot.isActive, logHandledTask]);
+
+  // Uplynutý čas behu autopilota
+  useEffect(() => {
+    if (!autopilot.isActive || !autopilot.activatedAt) return;
+    const tick = () => setElapsed(formatElapsed(Date.now() - (autopilot.activatedAt as number)));
+    tick();
+    const interval = setInterval(tick, 30000);
+    return () => clearInterval(interval);
+  }, [autopilot.isActive, autopilot.activatedAt]);
+
+  // Zavretie súhrnu klávesou Escape + presun fokusu na tlačidlo
+  useEffect(() => {
+    if (summaryHandled === null) return;
+    closeBtnRef.current?.focus();
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setSummaryHandled(null);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [summaryHandled]);
+
+  // Cleanup timeoutu feedbacku
+  useEffect(() => () => {
+    if (bankTimer.current) clearTimeout(bankTimer.current);
+  }, []);
 
   const handleActivate = () => {
     if (!hasEarnedDay) return;
@@ -121,10 +168,15 @@ export const EarnedDayOff: React.FC = () => {
     const chunk = Math.round((0.5 + Math.random() * 3) * 10) / 10;
     const willEarn = Math.floor((autopilot.hoursBanked + chunk) / HOURS_PER_EARNED_DAY) >= 1;
     bankTime(chunk);
+    setLastBank(chunk);
+    if (bankTimer.current) clearTimeout(bankTimer.current);
+    bankTimer.current = setTimeout(() => setLastBank(null), 2500);
     if (willEarn) {
       sendNotification('🎉 Zarobil si deň voľna!', 'Agent práve dopracoval na celý deň voľna. Môžeš ho aktivovať.');
     }
   };
+
+  const closeSummary = useCallback(() => setSummaryHandled(null), []);
 
   return (
     <div className="space-y-8">
@@ -139,16 +191,16 @@ export const EarnedDayOff: React.FC = () => {
             Deň voľna, ktorý ti zarobil agent
           </p>
         </div>
-        <div className="flex items-center gap-3">
-          <div className="glass px-5 py-3 flex items-center gap-3">
-            <Sparkles className="w-4 h-4 text-[#a855f7]" />
+        <div className="flex items-center gap-3 w-full md:w-auto">
+          <div className="glass px-5 py-3 flex items-center gap-3 flex-1 md:flex-none">
+            <Sparkles className="w-4 h-4 text-[#a855f7] shrink-0" />
             <div className="leading-tight">
               <div className="text-lg font-bold text-white">{autopilot.earnedDays}</div>
               <div className="text-[9px] font-mono uppercase tracking-widest text-white/40">Zarobené</div>
             </div>
           </div>
-          <div className="glass px-5 py-3 flex items-center gap-3">
-            <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+          <div className="glass px-5 py-3 flex items-center gap-3 flex-1 md:flex-none">
+            <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
             <div className="leading-tight">
               <div className="text-lg font-bold text-white">{autopilot.daysTaken}</div>
               <div className="text-[9px] font-mono uppercase tracking-widest text-white/40">Vyčerpané</div>
@@ -185,6 +237,17 @@ export const EarnedDayOff: React.FC = () => {
                   celý deň voľna.
                 </p>
               )}
+
+              {/* Emočný payoff — čo ten čas znamená */}
+              <div className="flex items-start gap-2 text-left w-full max-w-xs bg-white/[0.03] border border-white/5 rounded-xl p-3">
+                <Heart className="w-4 h-4 text-[#a855f7] shrink-0 mt-0.5" />
+                <p className="text-xs text-white/50 leading-relaxed">
+                  Zatiaľ nazbierané:{' '}
+                  <span className="text-white/80 font-medium">
+                    {lifeMomentsText(autopilot.hoursBanked)}
+                  </span>
+                </p>
+              </div>
             </div>
 
             {/* Akcie + vysvetlenie */}
@@ -199,27 +262,46 @@ export const EarnedDayOff: React.FC = () => {
                 </p>
               </div>
 
-              <button
-                onClick={handleActivate}
-                disabled={!hasEarnedDay}
-                className={cn(
-                  'w-full py-5 rounded-2xl font-bold uppercase tracking-widest text-sm flex items-center justify-center gap-3 transition-all',
-                  hasEarnedDay
-                    ? 'bg-gradient-to-r from-[#00f5ff] to-[#a855f7] text-black hover:brightness-110 neon-glow-cyan'
-                    : 'bg-white/5 text-white/30 cursor-not-allowed border border-white/10'
-                )}
-              >
-                <Power className="w-5 h-5" />
-                {hasEarnedDay ? 'Aktivovať deň voľna' : `Ešte ${hoursLeft}h k dňu voľna`}
-              </button>
+              <div className="space-y-3">
+                <button
+                  onClick={handleActivate}
+                  disabled={!hasEarnedDay}
+                  aria-label={hasEarnedDay ? 'Aktivovať deň voľna' : `Ešte ${hoursLeft} hodín k dňu voľna`}
+                  className={cn(
+                    'w-full py-5 rounded-2xl font-bold uppercase tracking-widest text-sm flex items-center justify-center gap-3 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00f5ff]',
+                    hasEarnedDay
+                      ? 'bg-gradient-to-r from-[#00f5ff] to-[#a855f7] text-black hover:brightness-110 neon-glow-cyan'
+                      : 'bg-white/5 text-white/30 cursor-not-allowed border border-white/10'
+                  )}
+                >
+                  <Power className="w-5 h-5" />
+                  {hasEarnedDay ? 'Aktivovať deň voľna' : `Ešte ${hoursLeft}h k dňu voľna`}
+                </button>
 
-              <button
-                onClick={handleDemoWork}
-                className="w-full py-3 rounded-xl text-[11px] font-bold uppercase tracking-widest text-white/50 hover:text-[#00f5ff] bg-white/[0.03] hover:bg-[#00f5ff]/5 border border-white/5 transition-all flex items-center justify-center gap-2"
-              >
-                <Play className="w-3.5 h-3.5" />
-                Nechať agenta pracovať (demo)
-              </button>
+                <button
+                  onClick={handleDemoWork}
+                  aria-label="Demo: nechať agenta odpracovať čas do banky"
+                  className="w-full py-3 rounded-xl text-[11px] font-bold uppercase tracking-widest text-white/50 hover:text-[#00f5ff] bg-white/[0.03] hover:bg-[#00f5ff]/5 border border-white/5 transition-all flex items-center justify-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00f5ff]/50"
+                >
+                  <Play className="w-3.5 h-3.5" />
+                  Nechať agenta pracovať (demo)
+                </button>
+
+                <div className="h-4 text-center" aria-live="polite">
+                  <AnimatePresence>
+                    {lastBank !== null && (
+                      <motion.span
+                        initial={{ opacity: 0, y: 4 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0 }}
+                        className="text-[11px] font-mono text-emerald-400"
+                      >
+                        +{lastBank}h do banky času
+                      </motion.span>
+                    )}
+                  </AnimatePresence>
+                </div>
+              </div>
             </div>
           </motion.div>
         ) : (
@@ -235,7 +317,7 @@ export const EarnedDayOff: React.FC = () => {
             <div className="lg:col-span-5 glass-card p-8 flex flex-col items-center justify-center text-center gap-6 relative overflow-hidden">
               <div className="absolute -inset-10 bg-gradient-to-br from-[#00f5ff]/10 to-[#a855f7]/10 blur-3xl -z-10" />
               <motion.div
-                animate={{ scale: [1, 1.06, 1] }}
+                animate={reduceMotion ? undefined : { scale: [1, 1.06, 1] }}
                 transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
                 className="w-24 h-24 rounded-full bg-gradient-to-br from-[#00f5ff] to-[#a855f7] flex items-center justify-center neon-glow-cyan"
               >
@@ -251,9 +333,15 @@ export const EarnedDayOff: React.FC = () => {
                 <span className="text-5xl font-bold text-white neon-text-cyan">{autopilot.handledToday}</span>
                 <span className="text-[#00f5ff] font-mono text-xs uppercase tracking-widest">úloh vybavených</span>
               </div>
+              {autopilot.activatedAt && (
+                <p className="text-[10px] font-mono uppercase tracking-widest text-white/30">
+                  Beží od {new Date(autopilot.activatedAt).toLocaleTimeString('sk-SK', { hour: '2-digit', minute: '2-digit' })} · {elapsed}
+                </p>
+              )}
               <button
                 onClick={handleEnd}
-                className="mt-2 px-6 py-3 rounded-xl text-[11px] font-bold uppercase tracking-widest text-white/60 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 transition-all flex items-center gap-2"
+                aria-label="Ukončiť deň voľna a zobraziť súhrn"
+                className="mt-2 px-6 py-3 rounded-xl text-[11px] font-bold uppercase tracking-widest text-white/60 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 transition-all flex items-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00f5ff]/50"
               >
                 <Moon className="w-4 h-4" />
                 Ukončiť deň
@@ -264,7 +352,9 @@ export const EarnedDayOff: React.FC = () => {
             <div className="lg:col-span-7 glass-card p-8">
               <h3 className="text-lg font-bold text-white mb-6 flex items-center gap-3">
                 <span className="relative flex h-2.5 w-2.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                  {!reduceMotion && (
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                  )}
                   <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
                 </span>
                 Naživo — čo agent práve vybavuje
@@ -303,7 +393,10 @@ export const EarnedDayOff: React.FC = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
-            onClick={() => setSummaryHandled(null)}
+            onClick={closeSummary}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="autopilot-summary-title"
           >
             <motion.div
               initial={{ scale: 0.9, y: 20 }}
@@ -315,7 +408,9 @@ export const EarnedDayOff: React.FC = () => {
               <div className="w-16 h-16 mx-auto rounded-full bg-[#a855f7]/15 flex items-center justify-center">
                 <Moon className="w-8 h-8 text-[#a855f7]" />
               </div>
-              <h3 className="text-xl font-bold text-white">Dnešok som zvládol.</h3>
+              <h3 id="autopilot-summary-title" className="text-xl font-bold text-white">
+                Dnešok som zvládol.
+              </h3>
               <p className="text-white/60 text-lg leading-relaxed">
                 Firma bežala. <b className="text-white">{summaryHandled} úloh</b> vybavených,{' '}
                 <b className="text-emerald-400">0 problémov</b>.
@@ -323,8 +418,9 @@ export const EarnedDayOff: React.FC = () => {
                 Uži si zajtrajšok. 🌅
               </p>
               <button
-                onClick={() => setSummaryHandled(null)}
-                className="w-full py-4 rounded-xl bg-gradient-to-r from-[#00f5ff] to-[#a855f7] text-black font-bold uppercase tracking-widest text-sm hover:brightness-110 transition-all flex items-center justify-center gap-2"
+                ref={closeBtnRef}
+                onClick={closeSummary}
+                className="w-full py-4 rounded-xl bg-gradient-to-r from-[#00f5ff] to-[#a855f7] text-black font-bold uppercase tracking-widest text-sm hover:brightness-110 transition-all flex items-center justify-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
               >
                 <Clock className="w-4 h-4" />
                 Zavrieť
