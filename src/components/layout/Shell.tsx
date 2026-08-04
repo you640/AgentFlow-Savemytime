@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
-  LayoutDashboard, 
-  Mail, 
-  Workflow, 
-  Settings, 
-  LineChart, 
+  LayoutDashboard,
+  Mail,
+  Workflow,
+  Settings,
+  LineChart,
   Blocks,
+  Plane,
   ChevronLeft,
   ChevronRight,
   Bot,
@@ -24,6 +25,7 @@ import { GlobalSearch } from './GlobalSearch';
 
 const navItems = [
   { path: '/', label: 'Prehľad', icon: LayoutDashboard },
+  { path: '/autopilot', label: 'Autopilot', icon: Plane },
   { path: '/comms', label: 'Comms', icon: Plus },
   { path: '/inbox', label: 'Inbox', icon: Mail },
   { path: '/workflows', label: 'Procesy', icon: Workflow },

@@ -1,13 +1,15 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
-import { 
-  TrendingUp, 
-  Clock, 
-  Zap, 
-  Package, 
-  MessageSquare, 
+import {
+  TrendingUp,
+  Clock,
+  Zap,
+  Package,
+  MessageSquare,
   ArrowUpRight,
-  ShieldCheck
+  ShieldCheck,
+  Plane
 } from 'lucide-react';
 import { 
   BarChart, 
@@ -20,7 +22,7 @@ import {
   AreaChart,
   Area 
 } from 'recharts';
-import { useStore } from '../../store/useStore';
+import { useStore, HOURS_PER_EARNED_DAY } from '../../store/useStore';
 import { cn } from '../../lib/utils';
 
 
@@ -50,15 +52,49 @@ const item = {
 };
 
 export const Overview: React.FC = () => {
-  const { timeSavedCount } = useStore();
+  const { timeSavedCount, autopilot } = useStore();
+  const hasEarnedDay = autopilot.earnedDays >= 1;
 
   return (
-    <motion.div 
+    <motion.div
       variants={container}
       initial="hidden"
       animate="show"
       className="space-y-8"
     >
+      {/* Autopilot CTA banner */}
+      <motion.div variants={item}>
+        <Link
+          to="/autopilot"
+          className="block glass-card p-6 relative overflow-hidden group border-l-4 border-l-[#00f5ff] hover:border-l-[#a855f7] transition-colors"
+        >
+          <div className="absolute -right-6 -top-6 opacity-10 group-hover:opacity-20 transition-opacity">
+            <Plane className="w-32 h-32 text-[#00f5ff]" />
+          </div>
+          <div className="flex items-center justify-between gap-4 relative">
+            <div>
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#00f5ff]">Autopilot</span>
+                {hasEarnedDay && (
+                  <span className="text-[9px] font-bold uppercase tracking-widest text-emerald-400 bg-emerald-400/10 border border-emerald-400/20 px-2 py-0.5 rounded-full">
+                    {autopilot.earnedDays} deň voľna pripravený
+                  </span>
+                )}
+              </div>
+              <h3 className="text-lg md:text-xl font-bold text-white tracking-tight">
+                {hasEarnedDay
+                  ? 'Agent ti zarobil deň voľna. Aktivuj ho →'
+                  : `Ešte ${Math.round((HOURS_PER_EARNED_DAY - autopilot.hoursBanked) * 10) / 10} h a máš deň voľna`}
+              </h3>
+              <p className="text-white/40 text-xs mt-1">
+                Nechaj agenta riadiť celý e-shop a venuj čas tomu, na čom naozaj záleží.
+              </p>
+            </div>
+            <ArrowUpRight className="w-6 h-6 text-white/30 group-hover:text-[#00f5ff] transition-colors shrink-0" />
+          </div>
+        </Link>
+      </motion.div>
+
       {/* Bento Grid Header Cards */}
       <div className="grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-fr">
         {/* Large Time Saved Card */}
