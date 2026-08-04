@@ -15,7 +15,7 @@ export interface WorkflowNode {
 
 export interface InboxItem {
   id: string;
-  source: 'gmail' | 'shopify' | 'instagram' | 'support';
+  source: 'gmail' | 'eshop' | 'instagram' | 'support';
   title: string;
   preview: string;
   time: string;

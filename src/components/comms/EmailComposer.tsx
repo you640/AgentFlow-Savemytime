@@ -1076,7 +1076,7 @@ export const EmailComposer: React.FC = () => {
           </div>
           <div>
             <h4 className="font-bold text-white text-sm">Zosynchronizované s CRM</h4>
-            <p className="text-white/30 text-[10px] uppercase font-mono tracking-widest mt-1">Aktualizuje vlákna v Shopify a Instagrame</p>
+            <p className="text-white/30 text-[10px] uppercase font-mono tracking-widest mt-1">Aktualizuje vlákna v E-shope a Instagrame</p>
           </div>
         </div>
         <div className="glass-card p-6 flex items-start gap-4 border-l-2 border-brand-purple">

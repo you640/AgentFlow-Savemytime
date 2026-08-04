@@ -17,10 +17,10 @@ export const WORKFLOW_TEMPLATES: WorkflowTemplate[] = [
   {
     id: 'order-automation',
     name: 'Vybavovanie objednávok',
-    description: 'Automatické generovanie faktúr a štítkov pre každú Shopify objednávku.',
+    description: 'Automatické generovanie faktúr a štítkov pre každú novú objednávku.',
     icon: ShoppingBag,
     nodes: [
-      { type: 'trigger', label: 'Shopify', sub: 'Nová objednávka', icon: ShoppingBag },
+      { type: 'trigger', label: 'E-shop', sub: 'Nová objednávka', icon: ShoppingBag },
       { type: 'action', label: 'SuperFaktura', sub: 'Vytvoriť faktúru', icon: FileText },
       { type: 'action', label: 'Packeta', sub: 'Objednať zásielku', icon: Truck },
     ]
@@ -31,7 +31,7 @@ export const WORKFLOW_TEMPLATES: WorkflowTemplate[] = [
     description: 'AI personalizované zľavy užívateľom, ktorí nechali tovar v košíku.',
     icon: ShoppingCart,
     nodes: [
-      { type: 'trigger', label: 'Shopify', sub: 'Opustený košík', icon: ShoppingCart },
+      { type: 'trigger', label: 'E-shop', sub: 'Opustený košík', icon: ShoppingCart },
       { type: 'logic', label: 'AI Analyzátor', sub: 'Kontrola ceny', icon: AlertCircle },
       { type: 'action', label: 'Gmail', sub: 'Odoslať zľavu', icon: Mail },
     ]
