@@ -9,7 +9,8 @@ import {
   MessageSquare,
   ArrowUpRight,
   ShieldCheck,
-  Plane
+  Plane,
+  Flame
 } from 'lucide-react';
 import { 
   BarChart, 
@@ -52,7 +53,7 @@ const item = {
 };
 
 export const Overview: React.FC = () => {
-  const { timeSavedCount, autopilot } = useStore();
+  const { timeSavedCount, autopilot, streak } = useStore();
   const hasEarnedDay = autopilot.earnedDays >= 1;
 
   return (
@@ -73,8 +74,11 @@ export const Overview: React.FC = () => {
           </div>
           <div className="flex items-center justify-between gap-4 relative">
             <div>
-              <div className="flex items-center gap-2 mb-1">
+              <div className="flex items-center gap-2 mb-1 flex-wrap">
                 <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#00f5ff]">Autopilot</span>
+                <span className="text-[9px] font-bold uppercase tracking-widest text-orange-300 bg-orange-500/10 border border-orange-500/20 px-2 py-0.5 rounded-full flex items-center gap-1">
+                  <Flame className="w-3 h-3" /> {streak.current} dní séria
+                </span>
                 {hasEarnedDay && (
                   <span className="text-[9px] font-bold uppercase tracking-widest text-emerald-400 bg-emerald-400/10 border border-emerald-400/20 px-2 py-0.5 rounded-full">
                     {autopilot.earnedDays} deň voľna pripravený

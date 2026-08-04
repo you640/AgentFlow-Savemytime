@@ -39,6 +39,12 @@ objednávky, faktúry a zákazníkov, a večer pošle **jednu vetu** so súhrnom
 - [x] Mobilné doladenie hlavičky a tlačidiel
 - [x] Overené: `tsc` ✅ · `vite build` ✅ · dev server + SPA route render ✅
 
+### Streak série 🔥 (maličkosť) ✅
+- [x] Stav série v store-i (`current`, `best`, `lastActiveDate`) + perzistencia
+- [x] Denne idempotentné pravidlo série (`computeStreak`) napojené na `bankTime`
+- [x] Chip „Séria (dní)" + banner „X dní po sebe · rekord Y" na Autopilotovi
+- [x] Streak badge v CTA banneri na Prehľade
+
 ### Ďalšie kroky (backlog)
 - [ ] Napojiť „banku času" na reálne akcie agenta (nie demo tlačidlo)
 - [ ] Zápis reálneho súhrnu dňa do inboxu / e-mailu majiteľovi

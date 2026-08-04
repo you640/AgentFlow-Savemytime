@@ -11,6 +11,7 @@ import {
   Play,
   PartyPopper,
   Heart,
+  Flame,
 } from 'lucide-react';
 import { useStore, HOURS_PER_EARNED_DAY } from '../../store/useStore';
 import { cn } from '../../lib/utils';
@@ -96,7 +97,7 @@ const ProgressRing: React.FC<{ percent: number; label: string; sub: string }> = 
 };
 
 export const EarnedDayOff: React.FC = () => {
-  const { autopilot, bankTime, activateDayOff, logHandledTask, endDayOff } = useStore();
+  const { autopilot, streak, bankTime, activateDayOff, logHandledTask, endDayOff } = useStore();
   const reduceMotion = useReducedMotion();
 
   const [feed, setFeed] = useState<FeedItem[]>([]);
@@ -191,7 +192,17 @@ export const EarnedDayOff: React.FC = () => {
             Deň voľna, ktorý ti zarobil agent
           </p>
         </div>
-        <div className="flex items-center gap-3 w-full md:w-auto">
+        <div className="flex items-center gap-3 w-full md:w-auto flex-wrap">
+          <div
+            className="glass px-5 py-3 flex items-center gap-3 flex-1 md:flex-none"
+            title={`Najdlhšia séria: ${streak.best} dní`}
+          >
+            <Flame className="w-4 h-4 text-orange-400 shrink-0" />
+            <div className="leading-tight">
+              <div className="text-lg font-bold text-white">{streak.current}</div>
+              <div className="text-[9px] font-mono uppercase tracking-widest text-white/40">Séria (dní)</div>
+            </div>
+          </div>
           <div className="glass px-5 py-3 flex items-center gap-3 flex-1 md:flex-none">
             <Sparkles className="w-4 h-4 text-[#a855f7] shrink-0" />
             <div className="leading-tight">
@@ -247,6 +258,15 @@ export const EarnedDayOff: React.FC = () => {
                     {lifeMomentsText(autopilot.hoursBanked)}
                   </span>
                 </p>
+              </div>
+
+              {/* Séria — retenčná mechanika */}
+              <div className="flex items-center justify-center gap-2 w-full max-w-xs bg-orange-500/10 border border-orange-500/20 rounded-xl p-3">
+                <Flame className="w-5 h-5 text-orange-400 shrink-0" />
+                <span className="text-sm text-white/80">
+                  <b className="text-orange-300">{streak.current} dní</b> po sebe ti agent ušetril čas
+                  <span className="text-white/40"> · rekord {streak.best}</span>
+                </span>
               </div>
             </div>
 
