@@ -60,6 +60,15 @@
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
+
+  /* Safe-area helpers (iPhone 17 Dynamic Island / home indicator) */
+  .pt-safe { padding-top: env(safe-area-inset-top); }
+  .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+  .pb-safe-nav { padding-bottom: calc(5.5rem + env(safe-area-inset-bottom)); }
+
+  /* Skryj scrollbar, ale zachovaj scrollovanie (chip lišty) */
+  .scrollbar-none { scrollbar-width: none; }
+  .scrollbar-none::-webkit-scrollbar { display: none; }
 }
 
 :root {

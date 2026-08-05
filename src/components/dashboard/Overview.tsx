@@ -73,7 +73,7 @@ export const Overview: React.FC = () => {
             <Plane className="w-32 h-32 text-[#00f5ff]" />
           </div>
           <div className="flex items-center justify-between gap-4 relative">
-            <div>
+            <div className="min-w-0 flex-1">
               <div className="flex items-center gap-2 mb-1 flex-wrap">
                 <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#00f5ff]">Autopilot</span>
                 <span className="text-[9px] font-bold uppercase tracking-widest text-orange-300 bg-orange-500/10 border border-orange-500/20 px-2 py-0.5 rounded-full flex items-center gap-1">
@@ -113,8 +113,8 @@ export const Overview: React.FC = () => {
           <div className="flex flex-col h-full">
             <span className="text-white/40 text-[10px] font-mono uppercase tracking-[0.2em] mb-2">Dnes ušetrený čas</span>
             <div className="flex items-baseline gap-3 mt-auto">
-              <span className="text-5xl font-bold text-white neon-text-cyan">{timeSavedCount}</span>
-              <span className="text-[#00f5ff] font-mono font-bold text-sm tracking-widest uppercase">Hodín</span>
+              <span className="text-4xl md:text-5xl font-bold text-white neon-text-cyan">{timeSavedCount}</span>
+              <span className="text-[#00f5ff] font-mono font-bold text-xs md:text-sm tracking-widest uppercase">Hodín</span>
             </div>
             <div className="mt-8 w-full h-1 bg-white/5 rounded-full overflow-hidden">
                <motion.div 
@@ -135,7 +135,7 @@ export const Overview: React.FC = () => {
         >
           <span className="text-white/40 text-[10px] font-mono uppercase tracking-[0.2em] mb-2">Vyriešené požiadavky</span>
           <div className="flex items-baseline gap-2 mt-2">
-            <span className="text-4xl font-bold text-white tracking-tighter">142</span>
+            <span className="text-3xl md:text-4xl font-bold text-white tracking-tighter">142</span>
             <div className="flex items-center gap-1 text-emerald-400 text-xs font-mono ml-auto">
               <TrendingUp className="w-3 h-3" />
               <span>+12%</span>
@@ -158,7 +158,7 @@ export const Overview: React.FC = () => {
         >
           <span className="text-white/40 text-[10px] font-mono uppercase tracking-[0.2em] mb-2">Chránený obrat</span>
           <div className="flex items-baseline gap-2 mt-4">
-            <span className="text-4xl font-bold text-white tracking-tighter">€1,840</span>
+            <span className="text-3xl md:text-4xl font-bold text-white tracking-tighter">€1,840</span>
           </div>
           <div className="mt-6 p-3 rounded-xl bg-[#a855f7]/10 border border-[#a855f7]/20">
              <div className="flex items-center gap-2">
@@ -169,13 +169,13 @@ export const Overview: React.FC = () => {
         </motion.div>
 
         {/* Main Analytics Hub */}
-        <motion.div variants={item} className="md:col-span-12 lg:col-span-8 glass-card p-4 md:p-8">
-          <div className="flex justify-between items-center mb-10">
-            <div>
-               <h3 className="text-xl font-bold tracking-tight">Výkon systému</h3>
-               <p className="text-white/30 text-xs mt-1 uppercase tracking-widest font-mono">Metriky efektivity v reálnom čase</p>
+        <motion.div variants={item} className="md:col-span-12 lg:col-span-8 glass-card p-4 md:p-8 min-w-0">
+          <div className="flex justify-between items-center mb-6 md:mb-10 gap-4">
+            <div className="min-w-0">
+               <h3 className="text-lg md:text-xl font-bold tracking-tight">Výkon systému</h3>
+               <p className="text-white/30 text-[10px] md:text-xs mt-1 uppercase tracking-widest font-mono">Metriky efektivity v reálnom čase</p>
             </div>
-            <div className="flex gap-4 hidden sm:flex">
+            <div className="hidden sm:flex gap-4 shrink-0">
               <div className="flex items-center gap-2 group cursor-pointer">
                  <div className="w-2 h-2 rounded-full bg-[#00f5ff] shadow-[0_0_8px_#00f5ff]" />
                  <span className="text-[10px] font-mono uppercase tracking-widest text-[#00f5ff]">Hodiny optimalizácie</span>

@@ -436,7 +436,7 @@ export const EmailComposer: React.FC = () => {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 1.1 }}
-                className="glass-card p-20 flex flex-col items-center justify-center text-center space-y-6 min-h-[580px]"
+                className="glass-card p-8 md:p-20 flex flex-col items-center justify-center text-center space-y-6 min-h-[400px] md:min-h-[580px]"
               >
                 <div className="w-20 h-20 rounded-full bg-emerald-500/20 flex items-center justify-center border border-emerald-500/30">
                   <CheckCircle2 className="w-10 h-10 text-emerald-400" />
@@ -484,7 +484,7 @@ export const EmailComposer: React.FC = () => {
                 </div>
 
                 <form onSubmit={handleSend} className="flex-1 flex flex-col">
-                  <div className="p-6 space-y-4 flex-1 flex flex-col">
+                  <div className="p-4 md:p-6 space-y-4 flex-1 flex flex-col">
                     <div className="flex flex-col md:flex-row md:items-center gap-4 py-2 border-b border-white/5 group">
                       <span className="text-xs font-mono text-white/20 w-12 group-focus-within:text-brand-cyan transition-colors">TO:</span>
                       <input 
@@ -646,7 +646,7 @@ export const EmailComposer: React.FC = () => {
               </button>
             </div>
 
-            <div className="p-6 flex-1 flex flex-col overflow-y-auto max-h-[540px] scrollbar-hide">
+            <div className="p-4 md:p-6 flex-1 flex flex-col overflow-y-auto max-h-[540px] scrollbar-hide">
               <AnimatePresence mode="wait">
                 {activeTab === 'browse' ? (
                   <motion.div

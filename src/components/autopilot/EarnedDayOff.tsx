@@ -231,7 +231,7 @@ export const EarnedDayOff: React.FC = () => {
             className="grid grid-cols-1 lg:grid-cols-12 gap-6"
           >
             {/* Progress karta */}
-            <div className="lg:col-span-5 glass-card p-8 flex flex-col items-center justify-center text-center gap-6">
+            <div className="lg:col-span-5 glass-card p-6 md:p-8 flex flex-col items-center justify-center text-center gap-6">
               <ProgressRing
                 percent={percent}
                 label={`${autopilot.hoursBanked}h`}
@@ -271,7 +271,7 @@ export const EarnedDayOff: React.FC = () => {
             </div>
 
             {/* Akcie + vysvetlenie */}
-            <div className="lg:col-span-7 glass-card p-8 flex flex-col justify-between gap-8">
+            <div className="lg:col-span-7 glass-card p-6 md:p-8 flex flex-col justify-between gap-8">
               <div>
                 <h3 className="text-xl font-bold text-white mb-3">Ako to funguje</h3>
                 <p className="text-white/50 text-sm leading-relaxed">
@@ -334,7 +334,7 @@ export const EarnedDayOff: React.FC = () => {
             className="grid grid-cols-1 lg:grid-cols-12 gap-6"
           >
             {/* Kľudový panel */}
-            <div className="lg:col-span-5 glass-card p-8 flex flex-col items-center justify-center text-center gap-6 relative overflow-hidden">
+            <div className="lg:col-span-5 glass-card p-6 md:p-8 flex flex-col items-center justify-center text-center gap-6 relative overflow-hidden">
               <div className="absolute -inset-10 bg-gradient-to-br from-[#00f5ff]/10 to-[#a855f7]/10 blur-3xl -z-10" />
               <motion.div
                 animate={reduceMotion ? undefined : { scale: [1, 1.06, 1] }}
@@ -369,7 +369,7 @@ export const EarnedDayOff: React.FC = () => {
             </div>
 
             {/* Živý feed */}
-            <div className="lg:col-span-7 glass-card p-8">
+            <div className="lg:col-span-7 glass-card p-6 md:p-8">
               <h3 className="text-lg font-bold text-white mb-6 flex items-center gap-3">
                 <span className="relative flex h-2.5 w-2.5">
                   {!reduceMotion && (
@@ -412,7 +412,7 @@ export const EarnedDayOff: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 pt-[max(1rem,env(safe-area-inset-top))] pb-[max(1rem,env(safe-area-inset-bottom))] bg-black/70 backdrop-blur-sm"
             onClick={closeSummary}
             role="dialog"
             aria-modal="true"
@@ -423,7 +423,7 @@ export const EarnedDayOff: React.FC = () => {
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.9, y: 20 }}
               onClick={(e) => e.stopPropagation()}
-              className="glass-card p-8 max-w-md w-full text-center space-y-5"
+              className="glass-card p-6 md:p-8 max-w-md w-full max-h-[90vh] overflow-y-auto text-center space-y-5"
             >
               <div className="w-16 h-16 mx-auto rounded-full bg-[#a855f7]/15 flex items-center justify-center">
                 <Moon className="w-8 h-8 text-[#a855f7]" />

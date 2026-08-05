@@ -37,4 +37,27 @@ test.describe('iPhone 17 — mobilné rozloženie', () => {
     await expect(page).toHaveURL(/\/autopilot$/);
     await expect(page.locator('h1').first()).toContainText('Autopilot');
   });
+
+  test('Tap-targety spodnej nav ≥ 44×44 px (Apple HIG)', async ({ page }, testInfo) => {
+    test.skip(testInfo.project.name !== 'iphone-17', 'Len iPhone 17');
+
+    await page.goto('/');
+    const links = page.locator('nav.md\\:hidden a');
+    const count = await links.count();
+    expect(count).toBeGreaterThan(0);
+    for (let i = 0; i < count; i++) {
+      const box = await links.nth(i).boundingBox();
+      expect(box, `bounding box for nav link ${i}`).not.toBeNull();
+      expect(box!.width, `width of nav link ${i}`).toBeGreaterThanOrEqual(44);
+      expect(box!.height, `height of nav link ${i}`).toBeGreaterThanOrEqual(44);
+    }
+  });
+
+  test('index.html má viewport-fit=cover pre safe-area', async ({ page }, testInfo) => {
+    test.skip(testInfo.project.name !== 'iphone-17', 'Len iPhone 17');
+
+    await page.goto('/');
+    const viewport = await page.locator('meta[name="viewport"]').getAttribute('content');
+    expect(viewport, 'viewport meta content').toContain('viewport-fit=cover');
+  });
 });
