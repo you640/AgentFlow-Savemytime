@@ -39,6 +39,12 @@ objednávky, faktúry a zákazníkov, a večer pošle **jednu vetu** so súhrnom
 - [x] Mobilné doladenie hlavičky a tlačidiel
 - [x] Overené: `tsc` ✅ · `vite build` ✅ · dev server + SPA route render ✅
 
+### Streak série 🔥 (maličkosť) ✅
+- [x] Stav série v store-i (`current`, `best`, `lastActiveDate`) + perzistencia
+- [x] Denne idempotentné pravidlo série (`computeStreak`) napojené na `bankTime`
+- [x] Chip „Séria (dní)" + banner „X dní po sebe · rekord Y" na Autopilotovi
+- [x] Streak badge v CTA banneri na Prehľade
+
 ### Ďalšie kroky (backlog)
 - [ ] Napojiť „banku času" na reálne akcie agenta (nie demo tlačidlo)
 - [ ] Zápis reálneho súhrnu dňa do inboxu / e-mailu majiteľovi
@@ -83,4 +89,15 @@ skutočne dôležité 1 %, zvyšok drží od teba preč a chráni tvoje odpojeni
 
 ---
 
-_Aktuálny checkpoint: vetva `checkpoint/optimal-2026-08-04` (main @ 68092ad)._
+## 🧪 Kvalita, testy a CI ✅
+
+- [x] **E2E testy** (Playwright) naprieč všetkými 8 obrazovkami — load, hlavička, bez JS chýb, bez horizontálneho preteku (`e2e/screens.spec.ts`)
+- [x] **Špeciálne iPhone 17 testy** — projekt `iphone-17` (402×874 @3×): mobilná navigácia, skrytý sidebar, bez preteku, prepínanie obrazoviek + screenshoty (`e2e/iphone17.spec.ts`)
+- [x] **Základné CI** (`.github/workflows/ci.yml`): typecheck → build → E2E (desktop + iPhone 17) → upload reportu
+- [x] Skripty: `npm run test:e2e`, `npm run test:e2e:iphone`
+- [x] Overené lokálne: **25 passed, 0 failed** (desktop + iPhone 17)
+- [ ] **Responzivita + pixel-perfect** — pripravený prompt: `docs/prompts/responsivity-pixel-perfect.md`
+
+---
+
+_Checkpointy: `checkpoint/optimal-2026-08-04` (main @ 68092ad) · `checkpoint/e2e-ci-2026-08-04` (Autopilot + streak + E2E/CI)._

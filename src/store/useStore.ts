@@ -18,6 +18,32 @@ interface AutopilotState {
   handledToday: number;     // úlohy vybavené agentom počas aktívneho dňa
 }
 
+interface StreakState {
+  current: number;              // dní po sebe, kedy agent ušetril čas
+  best: number;                 // najdlhšia dosiahnutá séria
+  lastActiveDate: string | null; // 'YYYY-MM-DD' posledného aktívneho dňa
+}
+
+// Lokálny dátum ako 'YYYY-MM-DD' (bez UTC posunu)
+const dateStr = (d: Date = new Date()): string => {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${y}-${m}-${day}`;
+};
+
+const diffDays = (a: string, b: string): number =>
+  Math.round((new Date(b).getTime() - new Date(a).getTime()) / 86_400_000);
+
+// Aplikuje pravidlo série pre dnešný deň (idempotentne — raz za deň)
+const computeStreak = (s: StreakState): StreakState => {
+  const today = dateStr();
+  if (s.lastActiveDate === today) return s; // dnes už započítané
+  const current =
+    s.lastActiveDate && diffDays(s.lastActiveDate, today) === 1 ? s.current + 1 : 1;
+  return { current, best: Math.max(s.best, current), lastActiveDate: today };
+};
+
 interface AppState {
   isSidebarCollapsed: boolean;
   toggleSidebar: () => void;
@@ -25,6 +51,9 @@ interface AppState {
   setAgentStatus: (status: AgentStatus) => void;
   timeSavedCount: number;
   addTimeSaved: (hours: number) => void;
+
+  // Séria "X dní po sebe ti agent ušetril čas"
+  streak: StreakState;
 
   // Autopilot / Zarobený deň voľna
   autopilot: AutopilotState;
@@ -45,6 +74,13 @@ const DEFAULT_AUTOPILOT: AutopilotState = {
   handledToday: 0,
 };
 
+// Séria beží — posledný aktívny deň = včera, takže prvá práca dnes ju posunie +1
+const DEFAULT_STREAK: StreakState = {
+  current: 12,
+  best: 18,
+  lastActiveDate: dateStr(new Date(Date.now() - 86_400_000)),
+};
+
 export const useStore = create<AppState>()(
   persist(
     (set) => ({
@@ -55,6 +91,7 @@ export const useStore = create<AppState>()(
       timeSavedCount: 142.5,
       addTimeSaved: (hours) => set((state) => ({ timeSavedCount: round1(state.timeSavedCount + hours) })),
 
+      streak: { ...DEFAULT_STREAK },
       autopilot: { ...DEFAULT_AUTOPILOT },
 
       bankTime: (hours) => set((state) => {
@@ -62,6 +99,8 @@ export const useStore = create<AppState>()(
         const newDays = Math.floor(totalBanked / HOURS_PER_EARNED_DAY);
         return {
           timeSavedCount: round1(state.timeSavedCount + hours),
+          // Agent dnes ušetril čas → udrž/posuň sériu
+          streak: computeStreak(state.streak),
           autopilot: {
             ...state.autopilot,
             hoursBanked: round1(totalBanked % HOURS_PER_EARNED_DAY),
@@ -101,6 +140,7 @@ export const useStore = create<AppState>()(
       partialize: (state) => ({
         timeSavedCount: state.timeSavedCount,
         autopilot: state.autopilot,
+        streak: state.streak,
       }),
     }
   )
