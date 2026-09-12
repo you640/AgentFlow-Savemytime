@@ -5,14 +5,12 @@ import { componentRegistry } from './registry';
 export function ComponentsPage() {
   return (
     <div
+      className="mx-auto"
       style={{
-        padding: '48px 40px',
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        maxWidth: 'var(--canvas-max-width)'
+        maxWidth: 'var(--canvas-max-width)',
       }}>
-      
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 40 }}>
+
+      <div className="flex flex-col gap-8 md:gap-10 px-4 py-6 md:px-10 md:py-12">
         {componentRegistry.map((module) =>
         <ComponentSection key={module.componentName} module={module} />
         )}

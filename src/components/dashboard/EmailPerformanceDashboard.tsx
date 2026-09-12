@@ -363,7 +363,7 @@ export const EmailPerformanceDashboard: React.FC = () => {
     <div className="space-y-8 animate-in fade-in duration-500">
       
       {/* Top Controller Filters Section */}
-      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 bg-[#0a0a0f] p-6 rounded-2xl border border-white/5 shadow-xl">
+      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 bg-[#0a0a0f] p-4 md:p-6 rounded-2xl border border-white/5 shadow-xl">
         <div className="space-y-1">
           <h2 className="text-lg font-bold text-white flex items-center gap-2">
             <SlidersHorizontal className="w-4 h-4 text-[#00f5ff]" />
@@ -429,7 +429,7 @@ export const EmailPerformanceDashboard: React.FC = () => {
 
       {/* Target KPI Alert Sliders Overlay Widget (Architectural craftsmanship) */}
       <div className="grid grid-cols-1 xl:grid-cols-12 gap-6 items-stretch">
-        <div className="xl:col-span-4 glass-card p-6 flex flex-col justify-between">
+        <div className="xl:col-span-4 glass-card p-4 md:p-6 flex flex-col justify-between">
           <div>
             <div className="flex justify-between items-center mb-4">
               <span className="text-white/40 text-[10px] font-mono uppercase tracking-[0.2em]">Nastavenie cieľov SLA</span>
@@ -492,11 +492,11 @@ export const EmailPerformanceDashboard: React.FC = () => {
         </div>
 
         {/* Bento Grid Analytics Metric Cards */}
-        <div className="xl:col-span-8 grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div className="xl:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6">
           {/* Card 1: Total Sent */}
           <motion.div 
             whileHover={{ y: -4, scale: 1.01 }}
-            className="glass-card p-6 flex flex-col justify-between border-l-2 border-l-[#00f5ff]"
+            className="glass-card p-3 md:p-6 flex flex-col justify-between border-l-2 border-l-[#00f5ff]"
           >
             <div>
               <div className="flex justify-between items-start mb-4">
@@ -505,7 +505,7 @@ export const EmailPerformanceDashboard: React.FC = () => {
                   <Mail className="w-4 h-4" />
                 </div>
               </div>
-              <div className="text-3xl font-bold text-white tracking-tight">{stats.totalSent}</div>
+              <div className="text-2xl md:text-3xl font-bold text-white tracking-tight">{stats.totalSent}</div>
             </div>
             <div className="mt-8 flex items-center gap-1.5 text-xs">
               <span className="text-emerald-400 font-bold font-mono">+18%</span>
@@ -516,7 +516,7 @@ export const EmailPerformanceDashboard: React.FC = () => {
           {/* Card 2: Average Open Rate */}
           <motion.div 
             whileHover={{ y: -4, scale: 1.01 }}
-            className={`glass-card p-6 flex flex-col justify-between border-l-2 transition-colors ${
+            className={`glass-card p-3 md:p-6 flex flex-col justify-between border-l-2 transition-colors ${
               isOpenRateBelowTarget ? 'border-l-amber-500 bg-amber-500/[0.01]' : 'border-l-emerald-500'
             }`}
           >
@@ -543,7 +543,7 @@ export const EmailPerformanceDashboard: React.FC = () => {
           {/* Card 3: Average CTR */}
           <motion.div 
             whileHover={{ y: -4, scale: 1.01 }}
-            className={`glass-card p-6 flex flex-col justify-between border-l-2 transition-colors ${
+            className={`glass-card p-3 md:p-6 flex flex-col justify-between border-l-2 transition-colors ${
               isCTRBelowTarget ? 'border-l-amber-500 bg-amber-500/[0.01]' : 'border-l-[#a855f7]'
             }`}
           >
@@ -570,7 +570,7 @@ export const EmailPerformanceDashboard: React.FC = () => {
           {/* Card 4: Response Latency */}
           <motion.div 
             whileHover={{ y: -4, scale: 1.01 }}
-            className="glass-card p-6 flex flex-col justify-between border-l-2 border-l-rose-500"
+            className="glass-card p-3 md:p-6 flex flex-col justify-between border-l-2 border-l-rose-500"
           >
             <div>
               <div className="flex justify-between items-start mb-4">
@@ -579,7 +579,7 @@ export const EmailPerformanceDashboard: React.FC = () => {
                   <Clock className="w-4 h-4" />
                 </div>
               </div>
-              <div className="text-3xl font-bold text-white tracking-tight flex items-baseline gap-1">
+              <div className="text-2xl md:text-3xl font-bold text-white tracking-tight flex items-baseline gap-1">
                 <span>{stats.avgResponseTimeMin}</span>
                 <span className="text-sm font-sans text-white/40 font-normal">min</span>
               </div>
@@ -846,7 +846,7 @@ export const EmailPerformanceDashboard: React.FC = () => {
         {/* Table representation */}
         <div className="overflow-x-auto">
           {filteredCommunications.length > 0 ? (
-            <table className="w-full text-left border-collapse">
+            <table className="w-full min-w-[720px] text-left border-collapse">
               <thead>
                 <tr className="border-b border-white/5 font-mono text-[9px] text-white/30 uppercase tracking-wider">
                   <th className="py-3 px-4">Šablóna / Predmet</th>
@@ -937,7 +937,7 @@ export const EmailPerformanceDashboard: React.FC = () => {
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="bg-[#0b0b12] border border-white/10 rounded-2xl max-w-2xl w-full overflow-hidden shadow-2xl relative"
+              className="bg-[#0b0b12] border border-white/10 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative"
             >
               {/* Top Details Header */}
               <div className="p-6 border-b border-white/5 flex justify-between items-start bg-white/[0.01]">
@@ -1073,7 +1073,7 @@ export const EmailPerformanceDashboard: React.FC = () => {
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="bg-[#0b0b12] border border-white/10 rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl"
+              className="bg-[#0b0b12] border border-white/10 rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl"
             >
               <div className="p-6 border-b border-white/5 flex justify-between items-center bg-white/[0.01]">
                 <div className="flex items-center gap-2">

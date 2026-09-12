@@ -602,7 +602,7 @@ export const UnifiedInbox: React.FC = () => {
       </AnimatePresence>
 
       {/* Main Top Header */}
-      <div className="px-8 py-6 border-b border-white/5 flex flex-wrap justify-between items-center gap-4 bg-[#0a0a0f] shrink-0">
+      <div className="px-4 md:px-8 py-4 md:py-6 border-b border-white/5 flex flex-wrap justify-between items-center gap-4 bg-[#0a0a0f] shrink-0">
         <div>
           <h2 className="text-xl font-bold flex items-center gap-3">
             Prioritný Inbox
@@ -664,7 +664,7 @@ export const UnifiedInbox: React.FC = () => {
             mobileView === 'thread' ? 'hidden lg:flex' : 'flex'
           )}>
             {/* Header / Bulk check */}
-            <div className="px-6 py-4 bg-white/[0.01] border-b border-white/5 flex flex-wrap items-center justify-between gap-3 shrink-0 select-none">
+            <div className="px-4 md:px-6 py-3 md:py-4 bg-white/[0.01] border-b border-white/5 flex flex-wrap items-center justify-between gap-3 shrink-0 select-none">
               <div className="flex items-center gap-3">
                 <input 
                   type="checkbox"
@@ -947,7 +947,7 @@ export const UnifiedInbox: React.FC = () => {
             {currentActiveThread ? (
               <div className="flex flex-col h-full flex-1">
                 {/* Active Thread Header */}
-                <div className="px-6 py-4 border-b border-white/5 flex items-center justify-between bg-white/[0.02] shrink-0">
+                <div className="px-4 md:px-6 py-3 md:py-4 border-b border-white/5 flex items-center justify-between bg-white/[0.02] shrink-0 gap-3">
                   <div className="flex items-center gap-3">
                     {/* Mobile Back Button */}
                     <button 

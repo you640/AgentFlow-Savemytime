@@ -90,7 +90,7 @@ export const IntegrationsGrid: React.FC = () => {
               whileHover={{ y: -6, scale: 1.02 }}
               onClick={() => handleOpenModule(integration.id, integration.status)}
               className={cn(
-                "glass-card p-8 group relative overflow-hidden cursor-pointer selection:bg-transparent",
+                "glass-card p-6 md:p-8 group relative overflow-hidden cursor-pointer selection:bg-transparent",
                 integration.status === 'connected' ? "border-t-2 border-t-emerald-500" : ""
               )}
             >
@@ -130,9 +130,9 @@ export const IntegrationsGrid: React.FC = () => {
           );
         })}
         
-        <motion.div 
+        <motion.div
           whileHover={{ scale: 0.98 }}
-          className="glass-card p-8 border border-dashed border-white/10 flex flex-col items-center justify-center gap-6 group cursor-pointer hover:border-[#00f5ff]/30 h-full min-h-[260px]"
+          className="glass-card p-6 md:p-8 border border-dashed border-white/10 flex flex-col items-center justify-center gap-6 group cursor-pointer hover:border-[#00f5ff]/30 h-full min-h-[200px] md:min-h-[260px]"
         >
            <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-[#00f5ff]/10 transition-colors">
               <Plus className="w-8 h-8 text-white/20 group-hover:text-[#00f5ff]" />

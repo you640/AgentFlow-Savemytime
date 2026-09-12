@@ -96,7 +96,18 @@ skutočne dôležité 1 %, zvyšok drží od teba preč a chráni tvoje odpojeni
 - [x] **Základné CI** (`.github/workflows/ci.yml`): typecheck → build → E2E (desktop + iPhone 17) → upload reportu
 - [x] Skripty: `npm run test:e2e`, `npm run test:e2e:iphone`
 - [x] Overené lokálne: **25 passed, 0 failed** (desktop + iPhone 17)
-- [ ] **Responzivita + pixel-perfect** — pripravený prompt: `docs/prompts/responsivity-pixel-perfect.md`
+- [x] **Responzivita + pixel-perfect** — implementované per prompt (`docs/prompts/responsivity-pixel-perfect.md`):
+  - `index.html` viewport-fit=cover + theme-color + apple-mobile meta; `<html lang="sk">`, title AutoOps AI
+  - Shell: safe-area padding pre spodnú nav, hlavičku a AgentOrb; tap-targety min. 44×44 px na spodnej nav
+  - `src/index.css`: utility triedy `.pt-safe`, `.pb-safe`, `.pb-safe-nav`
+  - Overview: fluidná typografia veľkých čísel, `min-w-0` v CTA banneri, gap fix v analytics hube
+  - Autopilot: fluidný padding kariet (`p-6 md:p-8`), safe-area padding modalu, `max-h-[90vh]` scroll
+  - Inbox: fluidný padding hlavičiek zoznam/detail
+  - Analytics: fluidný filter bar, KPI karty 2/4-stĺpcový grid s menšou typografiou na mobile, tabuľka `min-w-[720px]` v `overflow-x-auto`, modaly `max-h-[90vh]` scroll
+  - Integrations: fluidný padding kariet, min-h len na md+
+  - Comms: fluidný padding editora, „správa odoslaná" state
+  - ComponentsPage: fluidný padding
+  - E2E rozšírené o kontrolu tap-targetov (≥44×44 px) a `viewport-fit=cover` meta
 
 ---
 

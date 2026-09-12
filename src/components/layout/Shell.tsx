@@ -123,13 +123,13 @@ export const Shell: React.FC<{ children: React.ReactNode }> = ({ children }) => 
       </motion.aside>
 
       {/* Mobile Bottom Navigation */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 h-20 bg-[#0a0a0f]/90 backdrop-blur-2xl border-t border-white/5 z-50 flex items-center justify-around px-2">
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-[#0a0a0f]/90 backdrop-blur-2xl border-t border-white/5 z-50 flex items-center justify-around px-2 pb-[env(safe-area-inset-bottom)]">
         {navItems.map((item) => (
           <NavLink
             key={item.path}
             to={item.path}
             className={({ isActive }) => cn(
-              "flex flex-col items-center gap-1 p-2 rounded-xl transition-all duration-300",
+              "flex flex-col items-center gap-1 py-2 px-1 rounded-xl transition-all duration-300 min-w-[44px] min-h-[44px] justify-center",
               isActive ? "text-[#00f5ff]" : "text-white/40"
             )}
           >
@@ -140,9 +140,9 @@ export const Shell: React.FC<{ children: React.ReactNode }> = ({ children }) => 
       </nav>
 
       {/* Main Content Area */}
-      <main className="flex-1 relative overflow-y-auto overflow-x-hidden scrollbar-hide flex flex-col pb-24 md:pb-0">
+      <main className="flex-1 relative overflow-y-auto overflow-x-hidden scrollbar-hide flex flex-col pb-[calc(6rem+env(safe-area-inset-bottom))] md:pb-0">
         {/* Header Strip */}
-        <header className="px-4 md:px-8 py-6 flex flex-col md:flex-row justify-between items-start md:items-center border-b border-white/5 gap-4">
+        <header className="px-4 md:px-8 pb-6 pt-[calc(1.5rem+env(safe-area-inset-top))] md:pt-6 flex flex-col md:flex-row justify-between items-start md:items-center border-b border-white/5 gap-4">
           <div className="flex items-center justify-between w-full md:w-auto">
             <div>
               <h1 className="text-xl md:text-2xl font-bold tracking-tight text-white flex items-center gap-3">
@@ -192,7 +192,7 @@ export const Shell: React.FC<{ children: React.ReactNode }> = ({ children }) => 
         </div>
 
         {/* Floating Agent Orb Overlay Decor */}
-        <div className="fixed bottom-24 md:bottom-8 right-4 md:right-8 z-40">
+        <div className="fixed right-4 md:right-8 md:bottom-8 z-40 bottom-[calc(6rem+env(safe-area-inset-bottom))]">
           <AgentOrb />
         </div>
         
