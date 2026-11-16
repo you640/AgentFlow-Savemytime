@@ -6,6 +6,7 @@ export interface Screen {
 
 export const SCREENS: Screen[] = [
   { path: '/', label: 'Prehľad' },
+  { path: '/asistent', label: 'Ela' },
   { path: '/autopilot', label: 'Autopilot' },
   { path: '/comms', label: 'Comms' },
   { path: '/inbox', label: 'Inbox' },

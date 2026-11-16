@@ -8,6 +8,7 @@ import {
   LineChart,
   Blocks,
   Plane,
+  Sparkles,
   ChevronLeft,
   ChevronRight,
   Bot,
@@ -25,6 +26,7 @@ import { GlobalSearch } from './GlobalSearch';
 
 const navItems = [
   { path: '/', label: 'Prehľad', icon: LayoutDashboard },
+  { path: '/asistent', label: 'Ela', icon: Sparkles },
   { path: '/autopilot', label: 'Autopilot', icon: Plane },
   { path: '/comms', label: 'Comms', icon: Plus },
   { path: '/inbox', label: 'Inbox', icon: Mail },
